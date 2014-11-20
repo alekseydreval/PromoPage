@@ -36,34 +36,56 @@ var alphaValidator = validate({
   message: 'Поле содержит недопустимые символы'
 });
 
+var reqMsg = '{PATH} Не может быть пустым'
+
 
 var application = new mongoose.Schema({
   _step:      { type: Number, default: 1 },
-  firstname:  { type: String, validate: [maxLengthValidator(30), alphaValidator] },
-  lastname:   { type: String, validate: [maxLengthValidator(30), alphaValidator] },
-  middlename: { type: String, validate: [maxLengthValidator(30), alphaValidator] },
-  phone:      { type: Number },
-  gender:     { type: String },
+  firstname:  { type: String, required: reqMsg, validate: [maxLengthValidator(30), alphaValidator] },
+  lastname:   { type: String, required: reqMsg, validate: [maxLengthValidator(30), alphaValidator] },
+  middlename: { type: String, required: reqMsg, validate: [maxLengthValidator(30), alphaValidator] },
+  phone:      { type: Number, required: reqMsg },
+  gender:     { type: String, required: reqMsg },
   passport: {
-    number:      { type: Number, validate: [fixedLengthValidator(6), numericValidator] },
-    series:      { type: Number, validate: [fixedLengthValidator(4), numericValidator] },
-    dateOfIssue: { type: Date,   validate: [ /* Probably Date object, probably string... */ ] },
-    issuedBy:    { type: String, validate: maxLengthValidator(150) },
-    depCode:     { type: Number, validate: [fixedLengthValidator(6), numericValidator] },
-    regAddress:  { type: String, validate: [maxLengthValidator(150)] }
+    number:      { type: Number, required: reqMsg, validate: [fixedLengthValidator(6), numericValidator] },
+    series:      { type: Number, required: reqMsg, validate: [fixedLengthValidator(4), numericValidator] },
+    dateOfIssue: { type: Date,   required: reqMsg, validate: [ /* Probably Date object, probably string... */ ] },
+    issuedBy:    { type: String, required: reqMsg, validate: maxLengthValidator(150) },
+    depCode:     { type: Number, required: reqMsg, validate: [fixedLengthValidator(6), numericValidator] },
+    regAddress:  { type: String, required: reqMsg, validate: [maxLengthValidator(150)] }
   },
   job: {
     orgName: { type: String, validate: [maxLengthValidator(50), alphaNumericValidator] },
-    address:  {  type: String,  validate: [maxLengthValidator(150)] },
-    position: {  type: String,  validate: [maxLengthValidator(50), alphaNumericValidator] },
-    phone:    {  type: String,  validate: [maxLengthValidator(20)] },
-    contacts: [{ type: String,  validate: [alphaValidator, maxLengthValidator(50)] }]
+    address:  {  type: String,  required: reqMsg, validate: [maxLengthValidator(150)] },
+    position: {  type: String,  required: reqMsg, validate: [maxLengthValidator(50), alphaNumericValidator] },
+    phone:    {  type: String,  required: reqMsg, validate: [maxLengthValidator(20)] },
+    contacts: [{ type: String,  required: reqMsg, validate: [alphaValidator, maxLengthValidator(50)] }]
   },
   misc: {
     residentialAddress: { type: String, validate: maxLengthValidator },
     officeCityId: mongoose.Schema.ObjectId,    
     officeId: mongoose.Schema.ObjectId,    
   }
+});
+
+application.pre('validate', function(next) {
+  var t = this,
+      passFields = ['passport.number', 'passport.series', 'passport.dateOfIssue', 
+                    'passport.issuedBy', 'passport.depCode', 'passport.regAddress'],
+      jobFields  = ['job.orgName', 'job.address', 'job.position', 'job.phone', 'job.contacts'],
+      fieldsToOmmit = [];
+
+
+  if(this._step == 1)
+    fieldsToOmit = jobFields.concat(passFields);
+  else if(this._step == 2)
+    fieldsToOmit = jobFields;
+
+  fieldsToOmit.forEach(function(f) {
+    t.schema.path(f).required(false);
+  });
+
+  next();
 });
 
 module.exports = application;

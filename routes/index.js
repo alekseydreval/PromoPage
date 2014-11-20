@@ -49,31 +49,12 @@ var updateApplication = function(req, res, next) {
   }
 };
 
-var requireParams = function(paramsList) {
-  return function (req, res, next) {
-    console.log(req.body);
 
-    paramsList.forEach(function(field) {
-      req.assert(field, 'Не может быть пустым').notEmpty();
-    });
+module.exports.step1 = [checkStep(1), updateApplication];
 
-    errors = req.validationErrors();
-    if (errors)
-      res.json({ errors: errors }, 400);
-    else
-      next();
-  };
-}
+module.exports.step2 = [checkStep(2), updateApplication];
 
-
-module.exports.step1 = [checkStep(1), requireParams(['firstname', 'lastname', 'middlename', 'phone', 'gender']),
-                        updateApplication];
-
-module.exports.step2 = [checkStep(2), requireParams(['number', 'series', 'date_of_issue', 'issued_by', 'dep_code', 'reg_address']),
-                        updateApplication];
-
-module.exports.step3 = [checkStep(3), requireParams(['orgName', 'address', 'position', 'phone', 'contacts']),
-                        updateApplication];
+module.exports.step3 = [checkStep(3), updateApplication];
 
 module.exports.step4 = [checkStep(4), updateApplication, function (req, res) {
   delete req.session.currentStep;
