@@ -1,6 +1,6 @@
 var express = require('express');
-var router = express.Router();
-var validators = require('../middleware/validation');
+var mongoose = require('mongoose');
+var Application = mongoose.model('application', require('../models/application.js'));
 
 
 /**
@@ -10,47 +10,76 @@ var validators = require('../middleware/validation');
  */
 var checkStep = function(stepToPass) {
   return function(req, res, next) {
-    if(!req.session.currentStep) {
-      req.session.currentStep = 1;
-      next();
-      return;
+    console.log(req);
+
+    if(!req.session._applicationStep) {
+      req.session._applicationStep = 1;
+      return next();
     }
 
     // Allow to redo a previous step
-    if(stepToPass > req.session.currentStep)
+    if(stepToPass > req.session._applicationStep)
       res.write('Wrong application step', 403);
     else
       next();
-
   }
 };
 
 var moveToNextStep = function(req, res) {
-  req.session.currentStep += 1;
+  req.session._applicationStep += 1;
   res.json({}, 200);
 };
 
 var updateApplication = function(req, res, next) {
-  if(req.session.currentApplication) {
-    // Find and update
+  if(!req.session._applicationId) {
+    Application.create(req.body, function(err) {
+      if(err)
+        return next(err);
+      req.session._applicationId = res._id;
+      next()
+    });
   } else {
-    // Find or create
+    Application.update({ _id: req.session._applicationId }, function(err) {
+      if(err)
+        next(err);
+      else
+        next();
+    })
   }
 };
 
+var requireParams = function(paramsList) {
+  return function (req, res, next) {
+    console.log(req.body);
+
+    paramsList.forEach(function(field) {
+      req.assert(field, 'Не может быть пустым').notEmpty();
+    });
+
+    errors = req.validationErrors();
+    if (errors)
+      res.json({ errors: errors }, 400);
+    else
+      next();
+  };
+}
 
 
-router.post('/step1', checkStep(1), validators[0], updateApplication, moveToNextStep);
-router.post('/step2', checkStep(2), validators[1], updateApplication, moveToNextStep);
-router.post('/step3', checkStep(3), validators[2], updateApplication, moveToNextStep);
-router.post('/step4', checkStep(4), validators[3], updateApplication, function (req, res) {
+module.exports.step1 = [checkStep(1), requireParams(['firstname', 'lastname', 'middlename', 'phone', 'gender']),
+                        updateApplication];
+
+module.exports.step2 = [checkStep(2), requireParams(['number', 'series', 'date_of_issue', 'issued_by', 'dep_code', 'reg_address']),
+                        updateApplication];
+
+module.exports.step3 = [checkStep(3), requireParams(['orgName', 'address', 'position', 'phone', 'contacts']),
+                        updateApplication];
+
+module.exports.step4 = [checkStep(4), updateApplication, function (req, res) {
   delete req.session.currentStep;
-});
+}];
 
-
-/* GET landing page. */
-router.get('/', function(req, res) {
+module.exports.landing = function(req, res) {
   res.render('index', { title: 'Express' });
-});
+};
 
-module.exports = router;
+module.exports.moveToNextStep = moveToNextStep;
