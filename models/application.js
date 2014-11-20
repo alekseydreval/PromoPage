@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
 var validate = require('mongoose-validator');
+var mongooseTimestamp = require('mongoose-timestamp');
 var _ = require('lodash');
+
 
 /**
  * Validation functions
  */
+
 var maxLengthValidator = function(length) {
   return validate({
     validator: 'isLength',
@@ -67,6 +70,22 @@ var application = new mongoose.Schema({
     officeId: mongoose.Schema.ObjectId,    
   }
 });
+application.plugin(mongooseTimestamp);
+
+
+/**
+ * Static methods
+ */
+
+application.statics.betweenInterval = function (begin, end, query, cb) {
+  this.find(_.merge(query, { created_at: { $gt: begin, $lt: end }}), cb);
+});
+
+
+
+/**
+ * Hooks
+ */
 
 application.pre('validate', function(next) {
   var t = this,
