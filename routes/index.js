@@ -10,16 +10,17 @@ var Application = mongoose.model('application', require('../models/application.j
  */
 var checkStep = function(stepToPass) {
   return function(req, res, next) {
-    console.log(req);
+    console.log(req.session._applicationStep, stepToPass);
 
     if(!req.session._applicationStep) {
       req.session._applicationStep = 1;
-      return next();
     }
 
     // Allow to redo a previous step
-    if(stepToPass > req.session._applicationStep)
-      res.write('Wrong application step', 403);
+    if(stepToPass > req.session._applicationStep) {
+      res.writeHead(403);
+      res.end('Wrong application step');
+    }
     else
       next();
   }
