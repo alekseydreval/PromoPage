@@ -79,7 +79,7 @@ application.plugin(mongooseTimestamp);
 
 application.statics.betweenInterval = function (begin, end, query, cb) {
   this.find(_.merge(query, { created_at: { $gt: begin, $lt: end }}), cb);
-});
+};
 
 
 

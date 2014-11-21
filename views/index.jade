@@ -2,4 +2,18 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  div(id='js-form')
+  script(language='text/template', id='form-step-1')
+    form(action='/step1')
+      label Имя
+      input(type='text', name='firstname')
+      label Фамилия
+      input(type='text', name='surname')
+      label Отчество
+      input(type='text', name='middlename')
+  script(language='text/template', id='form-step-2')
+    form(action='/step2')
+      label Серия
+      input(type='text', name='passport[series]')
+      label Номер
+      input(type='text', name='passport[number]')

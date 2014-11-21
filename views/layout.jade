@@ -3,5 +3,17 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href="/javascripts/vendor/templates/bootstrap3.css")
+    script(src='./javascripts/vendor/jquery.js')
+    script(src='./javascripts/vendor/lodash.js')
+    script(src="./javascripts/vendor/backbone.js")
+    script(src="./javascripts/vendor/backbone.marionette.js")
+    script(src="./javascripts/vendor/backbone.forms.js")
+    script(src="./javascripts/vendor/templates/bootstrap3.js")
+    script(src="./javascripts/app/app.js")
+    script(src="./javascripts/app/controllers/form_controller.js")
+    script(src="./javascripts/app/views/step1_view.js")
+    script(type='text/javascript').
+      ApplicationForm.start();
   body
     block content
