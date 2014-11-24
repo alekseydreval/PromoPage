@@ -1,0 +1,126 @@
+// Private variables
+	// Color
+	@white-color-default: #fff;
+
+	// Shadow
+	@shadow-black-default: 0 1px 0 rgba(0,0,0,0.4);
+
+	// Size
+	@border-width-default: 1px;
+
+	// Indent
+	@indent-default: 15px;
+	@indent-small: 10px;
+
+	// Font
+	@font-family-default: 'PT Sans', sans-serif;
+	@font-family-alt: 'Ubuntu', sans-serif;
+
+	@font-size-default: 16px;
+	@font-size-big: 60px;
+
+	// Icon
+	@icon-size-default: 16px;
+
+
+// Bootstrap
+@import "bootstrap/bootstrap";
+
+// Slick slider
+@import "components/slick-slider";
+
+// Icon framework: Font Awesome
+@import "font-awesome/font-awesome";
+
+// Import art font
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500&subset=latin,cyrillic);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic);
+
+// Landing page
+.landing {
+	margin: 0;
+	font-size: @font-size-default;
+	font-family: @font-family-default;
+
+	.slides {
+		text-shadow: @shadow-black-default;
+		color: @white-color-default;
+
+		.slide {
+			position: relative;
+
+			.description {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+
+				left: 0;
+				top: 0;
+
+				.pattern-cell {
+					height: 100%;
+
+					&>div>* {
+						&:not(:last-child) {
+							margin-bottom: @indent-default*2;
+						}
+					}
+				}
+
+				.title {
+					font-family: @font-family-alt;
+					font-size: @font-size-big;
+					font-weight: bold;
+				}
+
+				.separator {
+					border-bottom: @border-width-default @white-color-default dotted;
+					box-shadow: @shadow-black-default;
+					width: 62px;
+				}
+
+				.text {
+					font-weight: bold;
+				}
+			}
+
+			img {
+				width: 100%;
+			}
+		}
+	}
+}
+
+// Patterns
+.pattern-cell {
+	display: table;
+
+	&>* {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+
+.box-sizing(@model) {
+	-webkit-box-sizing: @model;
+	-moz-box-sizing: @model;
+	
+	box-sizing: @model;
+}
+
+.user-select(@value) {
+	-webkit-touch-callout: @value;
+	-webkit-user-select: @value;
+	-khtml-user-select: @value;
+	-moz-user-select: @value;
+	-ms-user-select: @value;
+
+	user-select: @value;
+}
+
+.background-clip(@value) {
+	-webkit-background-clip: @value;
+	-moz-background-clip: @value;
+
+	background-clip: @value;
+}
