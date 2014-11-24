@@ -38,20 +38,22 @@ ApplicationForm.addRegions({
   formRegion: '#js-form'
 });
 
-// TODO: Fix route so that it works
-var router = new Backbone.Marionette.AppRouter({
-  // controller: ApplicationForm.Controllers.StepController,
-  routes: {
-    "": "defaultStep",
-    "step": "changeStep"
-  }, 
-  changeStep: function() {
-    console.log(123);
+ApplicationForm.Router = Marionette.AppRouter.extend({
+  appRoutes: {
+    "":               "detectStep",
+    "step/finished":  "finished",
+    "step/:n":        "changeStep"
   }
 });
-  Backbone.history.start();
 
+ApplicationForm.addInitializer(function() {
+  new ApplicationForm.Router({
+    controller: ApplicationForm.Controllers.StepController
+  });
+});
+
+// TODO: Fix route so that it works
 ApplicationForm.on("start", function (argument) {
-
-
+  if(Backbone.history)
+    Backbone.history.start();
 });

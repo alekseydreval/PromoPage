@@ -12,8 +12,9 @@ html
     script(src="./javascripts/vendor/templates/bootstrap3.js")
     script(src="./javascripts/app/app.js")
     script(src="./javascripts/app/controllers/form_controller.js")
-    script(src="./javascripts/app/views/step1_view.js")
-    script(type='text/javascript').
-      ApplicationForm.start();
+    script(src="./javascripts/app/entities/application.js")
+    script(src="./javascripts/app/views/step1.js")
   body
     block content
+  script(type='text/javascript').
+    ApplicationForm.start();

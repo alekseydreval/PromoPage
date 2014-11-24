@@ -8,7 +8,7 @@ var expressSession = require('express-session');
 var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
+var application = require('./routes/application');
 var applicationsApi = require('./routes/api/application');
 
 mongoose.connect('mongodb://localhost');
@@ -29,12 +29,8 @@ app.use(cookieParser());
 app.use(expressSession({ secret: 'keyboard cat' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', index.landing);
-app.post('/step1', index.step1, index.moveToNextStep);
-app.post('/step2', index.step2, index.moveToNextStep);
-app.post('/step3', index.step3, index.moveToNextStep);
-app.post('/step4', index.step4, index.moveToNextStep);
-// app.use('/api/applications', applicationsApi);
+app.get('/', application.landing);
+app.post('/process_step', application.checkStep, application.update, application.nextStep);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
