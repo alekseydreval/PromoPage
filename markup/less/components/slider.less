@@ -1,0 +1,54 @@
+.slider {
+	position: relative;
+	cursor: pointer;
+
+	height: @button-height-default;
+
+	.line {
+		top: (@button-height-default -  @slider-height-default)/2;
+		height: @slider-height-default;
+
+		border-radius: @border-radius-default;
+
+		&.basic {
+			position: relative;
+
+			background-color: @gray-color-light;
+			box-shadow: @shadow-white-default, @shadow-black-inset inset;
+		}
+
+		&.current {
+			position: absolute;
+
+			#gradient>.horizontal(@red-color-alt, @orange-color-default, 0%, 100%);
+
+			.marker {
+				position: absolute;
+
+				top: -@slider-height-default/2;
+				right: -@slider-height-default;
+
+				border-radius: @slider-height-default*2;
+				height: @slider-height-default*2;
+				width: @slider-height-default*2;
+
+				background-color: @orange-color-default;
+				border: @border-width-default @orange-color-alt solid;
+				box-shadow: @shadow-white-default, 0 0 2px rgba(255,255,255,0.2) inset;
+
+				&>div {
+					position: absolute;
+					top: @slider-height-default/2 - @border-width-default;
+					left: @slider-height-default/2 - @border-width-default;
+
+					border-radius: @slider-height-default;
+					width: @slider-height-default;
+					height:  @slider-height-default;
+
+					#gradient>.vertical(@white-color-default, @white-color-alt, 0%, 100%);
+					border: @border-width-default @white-color-default solid;
+				}
+			}
+		}
+	}
+}

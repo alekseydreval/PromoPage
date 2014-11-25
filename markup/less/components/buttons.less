@@ -1,0 +1,82 @@
+// Prototype button
+
+.ui-button (@height: @button-height-default, @padding: @indent-default) {
+	// Classic type
+	&.rectangular {
+		padding: 0 @padding;
+		height: @height;
+
+		i:first-child { margin-right: @indent-small; }
+		i:last-child { margin-left: @indent-small; }
+	}
+
+	&.square {
+		height: @height;
+		width: @height;
+		padding: 0;
+	}
+
+	// Reset
+	&.clear {
+		padding: 0;
+		margin: 0;
+
+		&::-moz-focus-inner {
+			padding: none;
+			border: none;
+		}
+	}
+
+	// Types
+	&.link {
+		border-top: none;
+		border-left: none;
+		border-right: none;
+
+		border-bottom-style: dotted;
+		border-bottom-width: @border-width-default;
+	}
+
+	&.big {
+		height: @button-height-big;
+		padding: 0 @padding;
+
+		text-align: center;
+		width: 100%;
+	}
+
+	// Themes
+	&.green {
+		#gradient>.vertical(@green-color-default, @green-color-alt, 0%, 100%);
+		border: @border-width-default @green-color-dark solid;
+		border-radius: @border-radius-default;
+
+		box-shadow: 0 2px 0 rgba(255,255,255,0.2) inset;
+		text-shadow: @shadow-black-default;
+		
+		font-size: @font-size-medium;
+		font-weight: bold;
+
+		color: @white-color-default;
+	}
+}
+
+// Description selector buttons parent interface
+
+button {
+	font-family: @font-family-default;
+
+	&:not([disabled]) { cursor: pointer; }
+	&[disabled] { cursor: default; }
+	
+	.ui-button ();
+}
+
+a.button {
+	display: inline-block;
+	
+	.box-sizing(border-box);
+	.ui-button ();
+
+	&.rectangular, &.square { line-height: @button-height-default; }
+}

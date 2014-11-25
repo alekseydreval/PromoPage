@@ -5,9 +5,41 @@ html
 
   body.landing
     div.wrapper
-      div.slides#promo
+      div.header: div.container
+        div.pattern-cell
+          a(href="/").logo: img(src="img/logo.png")
+          div.city
+            span Ваш город:
+            button.clear.link: span Архангельск
+
+      div.loan: div.container
+        div.board
+          div.ineed
+            span Мне нужно:
+            span.sum 20000 &#8399;
+
+            div.slider
+              div.line.basic
+              div.line.current(style="width: 50%;")
+                div.marker: div
+
+          div.terms
+            div.pattern-cell
+              div Готов вернуть:
+              div: button.clear.link: span 12 декабря 2014
+
+            div.pattern-cell
+              div Сумма процентов по займу:
+              div: strong 2400 &#8399;
+
+            button.big.green
+              span Получить деньги
+
+          div.details Нажимая кнопку «Получить деньги», Вы подтверждаете, что знаете и принимаете Правила предоставления микрозаймов и полностью согласны с Политикой использования персональных данных.
+
+      div.slides
         div.slide
-          img(src="img/slide1.jpg")
+          div.background(style="background-image: url(img/slide1.jpg)")
 
           div.description
             div.container
@@ -17,7 +49,7 @@ html
                 div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
 
         div.slide
-          img(src="img/slide1.jpg")
+          div.background(style="background-image: url(img/slide1.jpg)")
 
           div.description
             div.container

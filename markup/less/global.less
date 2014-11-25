@@ -1,12 +1,47 @@
 // Private variables
 	// Color
 	@white-color-default: #fff;
+	@white-color-alt: #f5f5f5;
+
+	@white-color-light: #fcfcfc;
+
+	@gray-color-default: #999999;
+	@gray-color-light: #e0e0e0;
+	@gray-color-light-alt: #dddddd;
+
+	@red-color-default: #cc2936;
+	@red-color-alt: #cc2944;
+
+	@orange-color-default: #e6a117;
+	@orange-color-alt: #cc8f14;
+
+	@blue-color-default: #5c7099;
+
+	@green-color-default: #59b259;
+	@green-color-alt: #4c994c;
+	@green-color-dark: #3d993d;
 
 	// Shadow
 	@shadow-black-default: 0 1px 0 rgba(0,0,0,0.4);
+	@shadow-black-inset: 0 1px 2px rgba(0,0,0,0.1);
+	@shadow-black-substrate: 0 0 20px rgba(0,0,0,0.2);
+
+	@shadow-white-default: 0 1px 0 rgba(255,255,255,0.4);
 
 	// Size
+	@header-height-default: 50px;
+
+	@loan-board-default: 370px;
+
+	@slides-height-default: 860px;
+
+	@slider-height-default: 10px;
+	
+	@button-height-default: 40px;
+	@button-height-big: 70px;
+
 	@border-width-default: 1px;
+	@border-radius-default: 4px;
 
 	// Indent
 	@indent-default: 15px;
@@ -17,7 +52,8 @@
 	@font-family-alt: 'Ubuntu', sans-serif;
 
 	@font-size-default: 16px;
-	@font-size-big: 60px;
+	@font-size-alt: 12px;
+	@font-size-medium: 24px;
 
 	// Icon
 	@icon-size-default: 16px;
@@ -28,6 +64,10 @@
 
 // Slick slider
 @import "components/slick-slider";
+
+// Landing page UI
+@import "components/buttons";
+@import "components/slider";
 
 // Icon framework: Font Awesome
 @import "font-awesome/font-awesome";
@@ -42,12 +82,147 @@
 	font-size: @font-size-default;
 	font-family: @font-family-default;
 
+	.wrapper { position: relative; }
+
+	.header {
+		top: @header-height-default;
+		width: 100%;
+		left: 0;
+		
+		.layer(3);
+
+		.logo {
+			display: block;
+			padding-right: @indent-small*4;
+
+			border-right: @border-width-default rgba(0,0,0,0.2) solid;
+		}
+
+		.city {
+			padding-left: @indent-small*4;
+			border-left: @border-width-default rgba(255,255,255,0.2) solid;
+
+			.link {
+				margin-left: @indent-small;
+				border-bottom-color: @white-color-default;
+				background-color: transparent;
+
+				font-size: @font-size-default;
+				font-weight: bold;
+			}
+
+			span {
+				text-shadow: @shadow-black-default;
+				color: @white-color-default;
+			}
+		}
+	}
+
+	.loan {
+		width: 100%;
+		top: @indent-small*10 + @header-height-default*2;
+
+		.layer(2);
+
+		.board {
+			display: inline-block;
+			padding: @indent-small*4;
+			float: right;
+
+			background-color: @white-color-default;
+			box-shadow: @shadow-black-substrate;
+
+			border: @border-width-default @white-color-default solid;
+			border-radius: @border-radius-default*2;
+
+			text-shadow: @shadow-white-default;
+
+			#gradient>.vertical(@white-color-default, @white-color-alt, 0%, 100%);
+
+			.box-sizing(border-box);
+
+			// I need
+
+			.ineed {
+				text-align: center;
+
+				span {
+					font-weight: bold;
+
+					&:not(.sum) { text-transform: uppercase; }
+					&.sum {
+						display: block;
+						font-size: @font-size-default*4;
+
+						margin-top: -5px;
+						margin-bottom: 8px;
+					}
+				}
+			}
+
+			// Terms
+
+			.terms {
+				padding-top: 18px;
+
+				.pattern-cell {
+					width: 100%;
+
+					&>*:last-child { text-align: right; }
+
+					&:not(:last-child) {
+						border-bottom: @border-width-default @gray-color-light-alt solid;
+						padding-bottom: @indent-small*3 + 5px;
+					}
+
+					&:not(:first-child) {
+						border-top: @border-width-default @white-color-light solid;
+						padding-top: @indent-small*3 + 4px;
+					}
+				}
+
+				.link {
+					background-color: transparent;
+					border-bottom-color: @blue-color-default;
+
+					font-weight: bold;
+					font-size: @font-size-default;
+					color: @blue-color-default;
+
+				}
+			}
+
+			// Details
+
+			.details {
+				margin-top: @indent-small*4 - 5px;
+
+				font-size: @font-size-alt;
+				font-style: italic;
+
+				color: @gray-color-default;
+				text-align: center;
+			}
+
+			@media (min-width: @screen-sm) {
+				width: @loan-board-default;
+			}
+		}
+	}
+
 	.slides {
 		text-shadow: @shadow-black-default;
 		color: @white-color-default;
 
+		height: @slides-height-default;
+
 		.slide {
 			position: relative;
+			
+			.background {
+				background-position: center top;
+				height: 100%;
+			}
 
 			.description {
 				position: absolute;
@@ -69,7 +244,7 @@
 
 				.title {
 					font-family: @font-family-alt;
-					font-size: @font-size-big;
+					font-size: @font-size-default*3;
 					font-weight: bold;
 				}
 
@@ -79,13 +254,7 @@
 					width: 62px;
 				}
 
-				.text {
-					font-weight: bold;
-				}
-			}
-
-			img {
-				width: 100%;
+				.text { font-weight: bold; }
 			}
 		}
 	}
@@ -123,4 +292,9 @@
 	-moz-background-clip: @value;
 
 	background-clip: @value;
+}
+
+.layer(@z-index) {
+	position: absolute;
+	z-index: @z-index;
 }

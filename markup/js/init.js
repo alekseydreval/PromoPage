@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#promo").slick({
+	$(".slides").slick({
 		responsive: [
 			{
 				breakpoint: 480,
