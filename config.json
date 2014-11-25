@@ -1,0 +1,10 @@
+{
+  "dadata": {
+    "keys": {
+      "API_KEY": "47e671452ed41a4ce208b02d1ff738d5b4a86f99",
+      "API_STANDARTIZATION_KEY": "a5e0acef3b4ad73fc80537d4684c60e9b8e39594"
+    },
+    "suggestionsURL": "https://dadata.ru/api/v2/suggest/",
+    "standartizationURL": "https://dadata.ru/api/v2/clean/"
+  }
+}

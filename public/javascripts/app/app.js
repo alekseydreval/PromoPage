@@ -1,12 +1,12 @@
 var ApplicationForm = new Marionette.Application();
 
-ApplicationForm.Utils = {
-  alphaValidator: function(value) {
+ApplicationForm.Validators = {
+  alpha: function(value) {
     if(value.match(/^[A-z]+$/)) return;
 
     return {
       type: 'Поле',
-      message: 'Поле должно содержать только буквы'
+      message: 'Поле должно содержать только символы алфавита'
     }
 
   },
@@ -31,6 +31,14 @@ ApplicationForm.Utils = {
         message: 'Значение не должно превышать ' + length + ' символов'
       }
     }
+  },
+
+  /**
+   * Combined validators for each use-case
+   */
+
+  varietyLengthName: function(length) {
+    return [ { type: 'required', message: 'Поле не может быть пустым' }, this.alpha, this.maxLength(length) ]
   }
 }
 
@@ -47,12 +55,11 @@ ApplicationForm.Router = Marionette.AppRouter.extend({
 });
 
 ApplicationForm.addInitializer(function() {
-  new ApplicationForm.Router({
+  ApplicationForm.RouterInstance = new ApplicationForm.Router({
     controller: ApplicationForm.Controllers.StepController
   });
 });
 
-// TODO: Fix route so that it works
 ApplicationForm.on("start", function (argument) {
   if(Backbone.history)
     Backbone.history.start();

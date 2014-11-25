@@ -8,8 +8,8 @@ var Application = mongoose.model('application', require('../models/application.j
  * @param  {[Number]} stepToPass [Step that should be passed now]
  * @return {[type]}              [A middleware function]
  */
-var checkStep = function(req, res, next) {
 
+module.exports.checkStep = function(req, res, next) {
   if(!req.session._applicationStep)
     req.session._applicationStep = 1;
 
@@ -25,7 +25,7 @@ var checkStep = function(req, res, next) {
     next();
 };
 
-var updateApplication = function(req, res, next) {
+module.exports.update = function(req, res, next) {
   if(!req.session._applicationId) {
     Application.create(req.body, function(err, res) {
       if(err)
@@ -46,16 +46,11 @@ var updateApplication = function(req, res, next) {
   }
 };
 
-var nextStep = function(req, res) {
+module.exports.nextStep = function(req, res) {
   req.session._applicationStep = req.session._applicationStep < 4 ? req.session._applicationStep + 1 : 'finished'
 
   res.json({ nextStep: req.session._applicationStep }, 200);
 };
-
-
-module.exports.checkStep = checkStep;
-module.exports.update    = updateApplication;
-module.exports.nextStep  = nextStep;
 
 module.exports.landing = function(req, res) {
   res.render('index', { title: 'Express' });

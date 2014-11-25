@@ -18,14 +18,17 @@ ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, B
   Controllers.StepController = {
 
     changeStep: function(id) {
-      var step;
-
-      step = new ApplicationForm.Views.Steps[id]({ submitButton: "Далее", model: getModel() });
+      var step = new ApplicationForm.Views.Steps[id]({ submitButton: "Далее", model: getModel() });
       step.initializeEvents();
 
       step.on('submit', function(e) {
         step.commit();
-        step.model.save({ success: processNextStep });
+        step.validatePhone(function(errMsg) {
+          if(errMsg)
+            step.fields.phone.setError(errMsg);
+          else
+            step.model.save({ success: processNextStep });
+        });
 
         e.preventDefault();
       });
@@ -40,10 +43,8 @@ ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, B
     },
 
     detectStep: function() {
-      if(localStorage.getItem('nextApplicationStep'))
-        Backbone.history.navigate('step/' + data.nextStep);
-      else
-        Backbone.history.navigate('step/1');
+      var step = localStorage.getItem('nextApplicationStep') || 1;
+      Backbone.history.navigate('step/' + step, { trigger: true, replace: true });
     },
 
     finished: function() {

@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 
 var application = require('./routes/application');
 var applicationsApi = require('./routes/api/application');
+var autocomplete = require('./routes/autocomplete');
 
 mongoose.connect('mongodb://localhost');
 
@@ -30,7 +31,8 @@ app.use(expressSession({ secret: 'keyboard cat' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', application.landing);
-app.post('/process_step', application.checkStep, application.update, application.nextStep);
+app.post('/application', application.checkStep, application.update, application.nextStep);
+app.post('/autocomplete', autocomplete);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
