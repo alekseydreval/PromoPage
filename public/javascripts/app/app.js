@@ -2,11 +2,25 @@ var ApplicationForm = new Marionette.Application();
 
 ApplicationForm.Validators = {
   alpha: function(value) {
-    if(value.match(/^[A-z]+$/)) return;
+    if(value.match(/^[\sа-я]+$/i)) return;
 
     return {
       type: 'Поле',
-      message: 'Поле должно содержать только символы алфавита'
+      message: 'Поле может содержать только символы русского алфавита'
+    }
+
+  },
+
+  required: function(value) {
+    if(typeof value == 'string')
+      value = value.trim();
+
+    if(value)
+      return;
+
+    return {
+      type: 'Поле',
+      message: 'Поле не может быть пустым'
     }
 
   },
@@ -38,7 +52,7 @@ ApplicationForm.Validators = {
    */
 
   varietyLengthName: function(length) {
-    return [ { type: 'required', message: 'Поле не может быть пустым' }, this.alpha, this.maxLength(length) ]
+    return [ this.required, this.alpha, this.maxLength(length) ]
   }
 }
 
