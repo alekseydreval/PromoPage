@@ -1,19 +1,58 @@
-extends layout
+- title = "РосДеньги";
 
+extends layout
 block content
-  h1= title
-  div(id='js-form')
-  script(language='text/template', id='form-step-1')
-    form(action='/step1')
-      label Имя
-      input(type='text', name='firstname')
-      label Фамилия
-      input(type='text', name='surname')
-      label Отчество
-      input(type='text', name='middlename')
-  script(language='text/template', id='form-step-2')
-    form(action='/step2')
-      label Серия
-      input(type='text', name='passport[series]')
-      label Номер
-      input(type='text', name='passport[number]')
+  body.landing
+    div.wrapper
+      div.header: div.container
+        div.pattern-cell
+          a(href="/").logo: img(src="img/logo.png")
+          div.city
+            span Ваш город:
+            button.clear.link: span Архангельск
+
+      div.loan: div.container
+        div.board
+          div.ineed
+            span Мне нужно:
+            span.sum 20000 &#8399;
+
+            div.slider(id="dragdealer-slider")
+              div.line.basic
+              div.line.current
+                div.marker: div
+
+          div.terms
+            div.pattern-cell
+              div Готов вернуть:
+              div: button.clear.link: span 12 декабря 2014
+
+            div.pattern-cell
+              div Сумма процентов по займу:
+              div: strong 2400 &#8399;
+
+            button.big.green
+              span Получить деньги
+
+          div.details Нажимая кнопку «Получить деньги», Вы подтверждаете, что знаете и принимаете Правила предоставления микрозаймов и полностью согласны с Политикой использования персональных данных.
+
+      div.slides
+        div.slide
+          div.background(style="background-image: url(img/slide1.jpg)")
+
+          div.description
+            div.container
+              div.pattern-cell: div
+                div.title Подарок для<br>любимой
+                div.separator
+                div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
+
+        div.slide
+          div.background(style="background-image: url(img/slide1.jpg)")
+
+          div.description
+            div.container
+              div.pattern-cell: div
+                div.title Подарок для<br>любимой
+                div.separator
+                div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.

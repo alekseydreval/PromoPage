@@ -6,5 +6,11 @@
     },
     "suggestionsURL": "https://dadata.ru/api/v2/suggest/",
     "standartizationURL": "https://dadata.ru/api/v2/clean/"
+  },
+  "loan": {
+    "minimumAmount": 5000,
+    "maximumAmount": 125000,
+    "steps": 10
   }
+
 }
