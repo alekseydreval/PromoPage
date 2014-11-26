@@ -20,7 +20,7 @@
 		&.current {
 			position: absolute;
 
-			#gradient>.horizontal(@red-color-alt, @orange-color-default, 0%, 100%);
+			#gradient>.horizontal(@red-color-dark, @red-color-light, 0%, 100%);
 
 			.marker {
 				position: absolute;
@@ -32,8 +32,8 @@
 				height: @slider-height-default*2;
 				width: @slider-height-default*2;
 
-				background-color: @orange-color-default;
-				border: @border-width-default @orange-color-alt solid;
+				background-color: @red-color-light;
+				border: @border-width-default @red-color-default solid;
 				box-shadow: @shadow-white-default, 0 0 2px rgba(255,255,255,0.2) inset;
 
 				&>div {

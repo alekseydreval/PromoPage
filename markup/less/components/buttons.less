@@ -48,6 +48,7 @@
 	// Themes
 	&.green {
 		#gradient>.vertical(@green-color-default, @green-color-alt, 0%, 100%);
+
 		border: @border-width-default @green-color-dark solid;
 		border-radius: @border-radius-default;
 
@@ -58,6 +59,22 @@
 		font-weight: bold;
 
 		color: @white-color-default;
+	}
+
+	&.red {
+		#gradient>.vertical(@red-color-light, @red-color-dark, 0%, 100%);
+
+		border: @border-width-default @red-color-dark solid;
+		border-radius: @border-radius-default;
+
+		box-shadow: 0 2px 0 rgba(255,255,255,0.2) inset;
+		text-shadow: @shadow-black-default;
+
+		color: @white-color-default;
+
+		&[disabled] {
+			opacity: 0.4;
+		}
 	}
 }
 

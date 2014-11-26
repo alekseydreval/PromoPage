@@ -57,19 +57,20 @@ ApplicationForm.Validators = {
 }
 
 ApplicationForm.addRegions({
-  formRegion: '#js-form'
+  formRegion: '#js-form',
+  calculatorRegion: '#js-calculator'
 });
 
 ApplicationForm.Router = Marionette.AppRouter.extend({
   appRoutes: {
-    "":               "detectStep",
-    "step/finished":  "finished",
-    "step/:n":        "changeStep"
+    // "":               "detectStep",
+    // "step/finished":  "finished",
+    // "step/:n":        "changeStep"
   }
 });
 
 ApplicationForm.addInitializer(function() {
-  ApplicationForm.RouterInstance = new ApplicationForm.Router({
+  new ApplicationForm.Router({
     controller: ApplicationForm.Controllers.StepController
   });
 });
@@ -77,4 +78,6 @@ ApplicationForm.addInitializer(function() {
 ApplicationForm.on("start", function (argument) {
   if(Backbone.history)
     Backbone.history.start();
+
+  ApplicationForm.Controllers.CalculatorController.initialize();
 });

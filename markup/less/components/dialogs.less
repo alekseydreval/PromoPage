@@ -1,0 +1,144 @@
+// A request for a loan
+.request-loan {
+	position: relative;
+
+	.information {
+		position: absolute;
+		left: 0;
+		top: 0;
+
+		background-color: @white-color-alt;
+		padding: @indent-default*2;
+
+		text-align: center;
+		width: 200px;
+		height: 100%;
+
+		box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05) inset;
+
+		.box-sizing(border-box);
+
+		.section {
+			.title { font-size: @font-size-small; }
+			.text { font-weight: bold; }
+
+			&:not(:first-child) {
+				padding-top: @indent-default*2;
+				border-top: @border-width-default @white-color-beta solid;
+			}
+
+			&:not(:last-child) {
+				padding-bottom: @indent-default*2;
+				border-bottom: @border-width-default @gray-color-light-alt solid;
+			}
+		}
+	}
+
+	.content {
+		background-color: @white-color-default;
+
+		padding: @indent-default*2 @indent-default*2 @indent-default*2 @indent-default*2+200px;
+		width: 830px;
+
+		.box-sizing(border-box);
+
+		.title {
+			font-size: @font-size-large;
+			font-weight: bold;
+
+			padding-bottom: @indent-default*2;
+			border-bottom: @border-width-default @gray-color-light-alt dotted;
+		}
+
+		.section {
+			padding: @indent-default*2 0;
+			border-bottom: @border-width-default @gray-color-light-alt dotted;
+
+			.caption {
+				margin-bottom: @indent-small;
+				font-size: @font-size-small;
+			}
+
+			.textbox {
+				&:not(:last-child) {
+					margin-bottom: @indent-default*2;
+				}
+
+				input {
+					background-color: @white-color-alt;
+					border: none;
+
+					box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset;
+				}
+			}
+		}
+
+		.agreement {
+			padding-top: @indent-default*2;
+
+			span {
+				font-size: @font-size-alt;
+				color: @gray-color-default;
+			}
+		}
+
+	}
+}
+
+// Dialog pattern
+.dialog {
+	display: inline-block;
+	border-radius: @border-radius-default*2;
+
+	.box-sizing(border-box);
+
+	&:not(.without) { padding: @indent-small*4; }
+
+	&:not([class*="th-"]) {
+		
+	}
+}
+
+// Pop-up window pattern 
+.window {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+
+	z-index: 101;
+
+	&>* {
+		height: inherit;
+
+		&.pattern-cell {
+			position: relative;
+			margin: 0 auto;
+
+			padding: @indent-small*10 0;
+
+			.box-sizing(border-box);
+		}
+	}
+
+	.dialog {
+		overflow: hidden;
+	}
+}
+
+.overlay {
+	position: fixed;
+	left: 0;
+	top: 0;
+
+	height: 100%;
+	width: 100%;
+
+	cursor: pointer;
+
+	z-index: 100;
+
+	&.dark {
+		background-color: rgba(0,0,0,0.8);
+	}
+}
