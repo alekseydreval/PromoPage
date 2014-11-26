@@ -53,6 +53,6 @@ module.exports.nextStep = function(req, res) {
 };
 
 module.exports.landing = function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'РосДеньги' });
 };
 
