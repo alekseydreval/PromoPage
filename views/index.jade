@@ -37,6 +37,18 @@ block content
           div.details Нажимая кнопку «Получить деньги», Вы подтверждаете, что знаете и принимаете Правила предоставления микрозаймов и полностью согласны с Политикой использования персональных данных.
 
       div.slides
+        - promos.forEach(function(promo) {
+          div.slide
+            div.background(style="background-image: url(#{promo.backgroundImage})")
+
+            div.description
+              div.container
+                div.pattern-cell: div
+                  div.title!= promo.title
+                  div.separator
+                  div.text!= promo.body
+
+        - });
         div.slide
           div.background(style="background-image: url(img/slide1.jpg)")
 
@@ -47,12 +59,3 @@ block content
                 div.separator
                 div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
 
-        div.slide
-          div.background(style="background-image: url(img/slide1.jpg)")
-
-          div.description
-            div.container
-              div.pattern-cell: div
-                div.title Подарок для<br>любимой
-                div.separator
-                div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.

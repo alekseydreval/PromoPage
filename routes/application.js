@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var Application = mongoose.model('application', require('../models/application.js'));
+var Promo = mongoose.model('promo', require('../models/promo.js'));
 
 
 /**
@@ -52,7 +53,12 @@ module.exports.nextStep = function(req, res) {
   res.json({ nextStep: req.session._applicationStep }, 200);
 };
 
-module.exports.landing = function(req, res) {
-  res.render('index', { title: 'РосДеньги' });
+module.exports.landing = function(req, res, next) {
+  Promo.find({}, function(err, promos) {
+    if(err)
+      next(err);
+    else
+      res.render('index', { title: 'РосДеньги', promos: promos });
+  });
 };
 
