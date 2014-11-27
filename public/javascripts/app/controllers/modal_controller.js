@@ -15,11 +15,11 @@ ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, B
   }
 
 
-  Controllers.StepController = {
+  Controllers.ModalController = {
 
-    changeStep: function(id) {
-      var step = new ApplicationForm.Views.Steps[id]({ submitButton: "Далее", model: getModel() });
-      step.initializeEvents();
+    getNextStep: function(id) {
+      var stepId = id || localStorage.getItem('nextApplicationStep') || 1;
+      var step = new ApplicationForm.Views.Steps[stepId]({ submitButton: "Далее", model: getModel() });
 
       step.on('submit', function(e) {
         step.commit();
@@ -33,18 +33,16 @@ ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, B
         e.preventDefault();
       });
 
-      ApplicationForm.formRegion.show(step);
+      // console.log(step.render())
+
+      return step;
+
 
       // If session.currentStep < :id then 
       //   redirect to /step/:session.currentStep 
       // else 
       //   render form
 
-    },
-
-    detectStep: function() {
-      var step = localStorage.getItem('nextApplicationStep') || 1;
-      Backbone.history.navigate('step/' + step, { trigger: true, replace: true });
     },
 
     finished: function() {

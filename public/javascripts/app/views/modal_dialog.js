@@ -4,8 +4,8 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
     template: "#modal-dialog-template",
 
     regions: {
-      information: ".information",
-      content:     ".content"
+      information: "#js-modal-info",
+      form:        "#js-modal-form"
     },
 
     onRender: function() {
@@ -14,16 +14,23 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
 
       $('body').on('click', function(e) {
         if(e.target.className.match(/window|pattern-cell|overlay/))
-          t.show();
+          t.hide();
       });
     },
 
     show: function() {
-      $('.overlay.dark').toggle();
-      $('.window').fadeToggle('fast');
-    }
+      $('.overlay.dark').show();
+      $('.window').show();
+      this.form.show(ApplicationForm.Controllers.ModalController.getNextStep());
+    },
 
+    hide: function() {
+      $('.overlay.dark').hide();
+      $('.window').hide();
+    }
 
   });
 
 });
+
+// 250 оверлэй мс -> и 250 модал

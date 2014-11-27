@@ -64,19 +64,13 @@ ApplicationForm.addRegions({
 
 ApplicationForm.Router = Marionette.AppRouter.extend({
   appRoutes: {
-    // "":               "detectStep",
-    // "step/finished":  "finished",
-    // "step/:n":        "changeStep"
+    "step/:n":        "getNextStep"
   }
 });
 
-ApplicationForm.addInitializer(function() {
-  new ApplicationForm.Router({
-    controller: ApplicationForm.Controllers.StepController
-  });
-});
-
 ApplicationForm.on("start", function (argument) {
+  new ApplicationForm.Router({ controller: ApplicationForm.Controllers.ModalController });
+
   if(Backbone.history)
     Backbone.history.start();
 

@@ -204,6 +204,9 @@ var Form = Backbone.View.extend({
         $ = Backbone.$;
 
     //Render form
+    console.log(this.templateData());
+    console.log(this.template(_.result(this, 'templateData')));
+
     var $form = $($.trim(this.template(_.result(this, 'templateData'))));
 
     //Render standalone editors

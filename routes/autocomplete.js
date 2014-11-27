@@ -35,9 +35,9 @@ module.exports = function (req, res) {
   request.post(options, function(error, response, body) {
     console.log(error, body);
     if(!error) 
-      res.json(response, response.statusCode);
+      res.json(response, 200);
     else
-      res.json(error);
+      res.json(error, 500);
   });
 
 }

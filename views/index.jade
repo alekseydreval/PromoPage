@@ -69,33 +69,42 @@ block content
       div
         div.dialog.without
           div.request-loan
-            div.information
-              img(src="img/logo-min-red.png")
-              div.section
-                div.title: span Сумма займа:
-                div.text: span 20000 рублей
-              
-              div.section
-                div.title: span Вернуть до:
-                div.text: span 30.02.2015 г.
+            div.information(id='js-modal-info')
+            div.content(id='js-modal-form')
 
-              div.section
-                div.title: span Сумма возврата:
-                div.text: span 22400 рублей
+    script(type='text/template', id='modal-info-template')
+      img(src="img/logo-min-red.png")
+      div.section
+        div.title: span Сумма займа:
+        div.text: span 20000 рублей
+      
+      div.section
+        div.title: span Вернуть до:
+        div.text: span 30.02.2015 г.
 
-            div.content
-              div.title: span Шаг 1 из 4  —  Контактные данные
-              div
-                div.section
-                  div.caption: span ФИО:
-                  div.textbox: input(type="text", placeholder="Введите вашу фамилию, имя и отчество")
+      div.section
+        div.title: span Сумма возврата:
+        div.text: span 22400 рублей
 
-                  div.caption: span Номер мобильного телефона:
-                  div.textbox
-                    input(type="text", placeholder="+7")
-                    div.toolbar
-                      button(disabled).rectangular.red
-                        span Подтвердить номер телефона
 
-                div.agreement
-                  span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.
+    script(type='text/template', id='modal-form-1-template')
+      div.title: span Шаг 1 из 4  —  Контактные данные
+      div
+        div.section
+          div.caption: span ФИО:
+          div.textbox
+            input(type="text", placeholder="Введите вашу фамилию, имя и отчество", id='js-fio-field')
+
+          div.caption
+            span Номер мобильного телефона:
+
+          div.textbox
+            div
+              input(type="text", placeholder="+7", id='js-phone-field')
+
+            div.toolbar
+              button(disabled).rectangular.red(id="js-sms-confirm")
+                span Подтвердить номер телефона
+
+        div.agreement
+          span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.
