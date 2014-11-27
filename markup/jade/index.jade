@@ -12,11 +12,23 @@ html
             span Ваш город:
             button.clear.link: span Архангельск
 
+        div.pattern-cell.feedback
+          div.callback
+            div.circle: span.icon-phone
+            div.phone
+              span Бесплатная линия
+              span 8 800 200-50-51
+
+          div.callme
+            button.white: span Заказать звонок
+
       div.loan: div.container
         div.dialog
           div.ineed
             span Мне нужно:
-            span.sum 20000 &#8399;
+            span.sum
+              span 20000
+              span &#8399;
 
             div.slider
               div.line.basic
@@ -32,7 +44,7 @@ html
               div Сумма процентов по займу:
               div: strong 2400 &#8399;
 
-            button.big.red
+            button.large.red
               span Получить деньги
 
           div.details Нажимая кнопку «Получить деньги», Вы подтверждаете, что знаете и принимаете <a href="/">Правила предоставления микрозаймов</a> и полностью согласны с <a href="">Политикой использования персональных данных</a>.
@@ -45,7 +57,7 @@ html
             div.container
               div.pattern-cell: div
                 div.title Подарок для<br>любимой
-                div.separator
+                div.separator.white
                 div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
 
         div.slide
@@ -55,42 +67,89 @@ html
             div.container
               div.pattern-cell: div
                 div.title Подарок для<br>любимой
-                div.separator
+                div.separator.white
                 div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
 
-  div.overlay.dark
+    div.wrapper.quickly-easily
+      div.key-steps: div.container
+        div.row
+          div.col-lg-4
+            div.pattern-cell
+              div.step-icon: span.icon-form
+              div.step-text
+                span Первый шаг:
+                br
+                span Отправьте заявку<br>прямо сейчас
 
-  div.window
-    div.pattern-cell: div
-      div.dialog.without
-        div.request-loan
-          div.information
-            img(src="img/logo-min-red.png")
-            div.section
-              div.title: span Сумма займа:
-              div.text: span 20000 рублей
+          div.col-lg-4
+            div.pattern-cell
+              div.step-icon: span.icon-time
+              div.step-text
+                span Второй шаг:
+                br
+                span Одобрение заявки<br>в течение 10 минут
+
+          div.col-lg-4
+            div.pattern-cell
+              div.step-icon: span.icon-wallet
+              div.step-text
+                span Третий шаг:
+                br
+                span Выдача денежных<br>средств
+
+      div.description: div.container
+        div.row
+          div.col-lg-6
+            div.title Быстро и просто
+            div.separator.red
+            p Многолетний опыт работы в сфере микрофинансирования и доведённые до совершентва алгоритмы работы позволяют нам на высочайшем уровне и в кратчайшие сроки помогать людям в решении их финансовых проблем.
+            ul
+              li
+                div: span.icon-check
+                div Займы от 1000 до 30000 рублей
+
+              li
+                div: span.icon-check
+                div Займы от 1000 до 30000 рублей
+
+              li
+                div: span.icon-check
+                div Займы от 1000 до 30000 рублей
+
+  // Overlay & A request for a loan
+  //- div.overlay.dark
+
+  //- div.window
+  //-   div.pattern-cell: div
+  //-     div.dialog.without
+  //-       div.request-loan
+  //-         div.information
+  //-           img(src="img/logo-min-red.png")
+  //-           div.section
+  //-             div.title: span Сумма займа:
+  //-             div.text: span 20000 рублей
             
-            div.section
-              div.title: span Вернуть до:
-              div.text: span 30.02.2015 г.
+  //-           div.section
+  //-             div.title: span Вернуть до:
+  //-             div.text: span 30.02.2015 г.
 
-            div.section
-              div.title: span Сумма возврата:
-              div.text: span 22400 рублей
+  //-           div.section
+  //-             div.title: span Сумма возврата:
+  //-             div.text: span 22400 рублей
 
-          div.content
-            div.title: span Шаг 1 из 4  —  Контактные данные
-            div
-              div.section
-                div.caption: span ФИО:
-                div.textbox: input(type="text", placeholder="Введите вашу фамилию, имя и отчество")
+  //-         div.content
+  //-           div.title: span Шаг 1 из 4  —  Контактные данные
+  //-           div
+  //-             div.section
+  //-               div.caption: span ФИО:
+  //-               div.textbox: input(type="text", placeholder="Введите вашу фамилию, имя и отчество")
 
-                div.caption: span Номер мобильного телефона:
-                div.textbox
-                  input(type="text", placeholder="+7")
-                  div.toolbar
-                    button(disabled).rectangular.red
-                      span Подтвердить номер телефона
+  //-               div.caption: span Номер мобильного телефона:
+  //-               div.textbox
+  //-                 input(type="text", placeholder="+7")
+  //-                 div.toolbar
+  //-                   button(disabled).rectangular.red
+  //-                     span Подтвердить номер телефона
 
-              div.agreement
-                span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.
+  //-             div.agreement
+  //-               span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.

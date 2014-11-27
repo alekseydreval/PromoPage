@@ -16,8 +16,6 @@
 
 		box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05) inset;
 
-		.box-sizing(border-box);
-
 		.section {
 			.title { font-size: @font-size-small; }
 			.text { font-weight: bold; }
@@ -39,8 +37,6 @@
 
 		padding: @indent-default*2 @indent-default*2 @indent-default*2 @indent-default*2+200px;
 		width: 830px;
-
-		.box-sizing(border-box);
 
 		.title {
 			font-size: @font-size-large;
@@ -89,14 +85,6 @@
 .dialog {
 	display: inline-block;
 	border-radius: @border-radius-default*2;
-
-	.box-sizing(border-box);
-
-	&:not(.without) { padding: @indent-small*4; }
-
-	&:not([class*="th-"]) {
-		
-	}
 }
 
 // Pop-up window pattern 
@@ -116,8 +104,6 @@
 			margin: 0 auto;
 
 			padding: @indent-small*10 0;
-
-			.box-sizing(border-box);
 		}
 	}
 

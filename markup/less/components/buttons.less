@@ -37,7 +37,7 @@
 		border-bottom-width: @border-width-default;
 	}
 
-	&.big {
+	&.large {
 		height: @button-height-big;
 		padding: 0 @padding;
 
@@ -46,21 +46,6 @@
 	}
 
 	// Themes
-	&.green {
-		#gradient>.vertical(@green-color-default, @green-color-alt, 0%, 100%);
-
-		border: @border-width-default @green-color-dark solid;
-		border-radius: @border-radius-default;
-
-		box-shadow: 0 2px 0 rgba(255,255,255,0.2) inset;
-		text-shadow: @shadow-black-default;
-		
-		font-size: @font-size-medium;
-		font-weight: bold;
-
-		color: @white-color-default;
-	}
-
 	&.red {
 		#gradient>.vertical(@red-color-light, @red-color-dark, 0%, 100%);
 
@@ -72,9 +57,18 @@
 
 		color: @white-color-default;
 
-		&[disabled] {
-			opacity: 0.4;
-		}
+		&[disabled] { opacity: 0.4; }
+	}
+
+	&.white {
+		border: @border-width-default*2 @white-color-default solid;
+		border-radius: @border-radius-default*6;
+		box-shadow: @shadow-black-default;
+
+		background-color: transparent;
+
+		font-size: @font-size-default;
+		font-weight: bold;
 	}
 }
 
@@ -92,7 +86,6 @@ button {
 a.button {
 	display: inline-block;
 	
-	.box-sizing(border-box);
 	.ui-button ();
 
 	&.rectangular, &.square { line-height: @button-height-default; }

@@ -58,28 +58,20 @@
 	.background-clip(text);
 
 	&:before {
-		font-family: "FontAwesome";
-
-		font-size: @icon-size-default;
-		font-weight: normal;
+		font-family: 'rdfont';
 		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
 
+		text-rendering: auto;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
 }
 
-.slick-prev {
-	left: @indent-small*4;
-
-	&:before { content: "\f053"; }
-}
-
-.slick-next {
-	right: @indent-small*4;
-
-	&:before { content: "\f054"; }
-}
+.slick-prev:before { content: "\e600"; }
+.slick-next:before { content: "\e608"; }
 
 
 /* Dots */

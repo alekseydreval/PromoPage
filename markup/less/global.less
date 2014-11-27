@@ -76,14 +76,21 @@
 @import "components/buttons";
 @import "components/slider";
 
-// Icon framework: Font Awesome
-@import "font-awesome/font-awesome";
+@import "components/not-sorted";
+
+// Icon framework: RDFont
+@import "components/rdfont";
 
 // Import art font
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500&subset=latin,cyrillic);
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic);
 
 // Landing page
+* {
+	outline: none;
+	.box-sizing(border-box);
+}
+
 .landing {
 	margin: 0;
 	font-size: @font-size-default;
@@ -91,17 +98,27 @@
 
 	.wrapper { position: relative; }
 
+	// Header, slides, loan board
+
 	.header {
 		top: @header-height-default;
-		width: 100%;
 		left: 0;
+
+		width: 100%;
 		
 		.layer(3);
 
-		.logo {
-			display: block;
-			padding-right: @indent-small*4;
+		.container { position: relative; }
 
+		.pattern-cell {
+			span {
+				text-shadow: @shadow-black-default;
+				color: @white-color-default;
+			}
+		}
+
+		.logo {
+			padding-right: @indent-small*4;
 			border-right: @border-width-default rgba(0,0,0,0.2) solid;
 		}
 
@@ -117,10 +134,50 @@
 				font-size: @font-size-default;
 				font-weight: bold;
 			}
+		}
 
-			span {
-				text-shadow: @shadow-black-default;
-				color: @white-color-default;
+		.feedback {
+			position: absolute;
+			right: @grid-gutter-width/2;
+			top: 0;
+
+			height: @header-height-default;
+
+			.callback {
+				position: relative;
+				padding-left: @button-height-default + @indent-small;
+
+				.circle {
+					position: absolute;
+					top: (@header-height-default - @button-height-default)/2;
+					left: 0;
+
+					border: @border-width-default*2 @white-color-default solid;
+					box-shadow: @shadow-black-default;
+
+					.circle(@button-height-default/2);
+				}
+
+				.phone {
+					&>*:first-child { font-size: @font-size-small; }
+
+					&>*:last-child {
+						display: block;
+						margin-top: -3px;
+
+						font-weight: bold;
+						font-size: 18px;
+					}
+				}
+			}
+
+			.callme {
+				padding-left: 36px;
+
+				button {
+					height: @button-height-default;
+					padding: 0 13px;
+				}
 			}
 		}
 	}
@@ -132,6 +189,8 @@
 		.layer(2);
 
 		.dialog {
+			padding: 33px 40px 37px 39px;
+
 			#gradient>.vertical(@white-color-default, @white-color-alt, 0%, 100%);
 
 			border: @border-width-default @white-color-default solid;
@@ -207,9 +266,7 @@
 				color: @gray-color-default;
 				text-align: center;
 
-				a {
-					color: @gray-color-default;
-				}
+				a { color: @gray-color-default; }
 			}
 
 			@media (min-width: @screen-sm) {
@@ -222,9 +279,10 @@
 		text-shadow: @shadow-black-default;
 		color: @white-color-default;
 
+		height: @slides-height-default;
+
 		.slide {
 			position: relative;
-			height: @slides-height-default;
 			
 			.background {
 				background-position: center top;
@@ -255,21 +313,101 @@
 					font-weight: bold;
 				}
 
-				.separator {
-					border-bottom: @border-width-default @white-color-default dotted;
-					box-shadow: @shadow-black-default;
-					width: 62px;
-				}
-
 				.text { font-weight: bold; }
 			}
 		}
 
 		.slick-prev, .slick-next {
+			text-shadow: @shadow-black-default;
 			color: @white-color-default;
 
-			&:before {
-				font-size: @font-size-default*2;
+			&:before { font-size: @font-size-default*2; }
+		}
+
+		.slick-prev { left: @indent-small*4; }
+
+		.slick-next { right: @indent-small*4; }
+
+	}
+
+	// Quickly and easily sector
+
+	.quickly-easily {
+		.key-steps {
+			#gradient>.vertical(@white-color-default, @white-color-alt, 0%, 100%);
+
+			.pattern-cell {
+				margin: 0 auto;
+				height: 280px;
+			}
+
+			.step-icon {
+				font-size: @icon-size-default*5;
+				color: @red-color-default;
+			}
+
+			.step-text {
+				padding-left: @indent-small*2;
+
+				span {
+					&:first-child {
+						font-size: @font-size-small;
+						color: @red-color-default;
+					}
+
+					&:last-child {
+						font-size: @font-size-large;
+						font-weight: bold;
+
+						line-height: 20px;
+					}
+				}
+			}
+		}
+
+		.description {
+			padding: 85px 0 100px 0;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.2) inset;
+
+			.title {
+				font-size: @font-size-default*3;
+				font-weight: bold;
+				margin-bottom: 16px;
+			}
+
+			p {
+				margin-top: 24px;
+				margin-bottom: 0;
+			}
+
+			ul {
+				display: table;
+				padding-left: 0;
+				margin: 0;
+
+				list-style-type: none;
+
+				li {
+					display: table-row;
+
+					&>div {
+						display: table-cell;
+						vertical-align: middle;
+
+						&:first-child {
+							font-size: @icon-size-default*2;
+							color: @red-color-default;
+
+							padding-right: 12px;
+						}
+
+						&:last-child {
+							font-size: @font-size-large;
+							font-weight: bold;
+						}
+					}
+				}
+
 			}
 		}
 	}
@@ -321,4 +459,14 @@
 .layer(@z-index) {
 	position: absolute;
 	z-index: @z-index;
+}
+
+.circle(@radius, @border-width: 2px) {
+	border-radius: 50%;
+
+	height: @radius*2;
+	width: @radius*2;
+
+	line-height: @radius*2 - @border-width*2;
+	text-align: center;
 }
