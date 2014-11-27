@@ -58,7 +58,8 @@ ApplicationForm.Validators = {
 
 ApplicationForm.addRegions({
   formRegion: '#js-form',
-  calculatorRegion: '#js-calculator'
+  calculatorRegion: '#js-calculator',
+  modalDialogRegion: '#js-modal-dialog'
 });
 
 ApplicationForm.Router = Marionette.AppRouter.extend({

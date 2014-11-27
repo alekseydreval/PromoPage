@@ -8,18 +8,13 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
     },
 
     triggerModal: function() {
-      $('.overlay.dark').toggle();
-      $('.window').fadeToggle('fast');
+      this.trigger('showModal');
     },
 
     initialize: function() {
       var t = this;
 
-      // $('body').on('click', function() {
-      //   console.log($(this).attr('class'))
-      //   if($(this).attr('class') == 'window' || $(this).attr('class') == 'pattern-cell' || $(this).attr('class') == 'overlay')
-      //     t.triggerModal();
-      // });
+      
 
     }
   });
