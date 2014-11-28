@@ -19,15 +19,15 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
 
     modelEvents: {
       "change:phone"             : "updateUIPhone",
-      "invalid"                  : "showError",
-      "validationPassed"         : "removeError"
+      "invalid"                  : "showErrors",
+      "validationPassed"         : "removeErrors"
     },
 
     updateUIPhone: function() {
       this.ui.phone.val(this.model.get('phone'));
     },
 
-    showError: function(model, error) {
+    showErrors: function(model, error) {
       if(error.phone) {
         this.toggleSMSConfirmation(false);
         this.ui.phone.addClass('errorField');
@@ -39,7 +39,7 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
 
     },
 
-    removeError: function(validFields) {
+    removeErrors: function(validFields) {
       if(validFields.phone) {
         this.ui.phone.removeClass('errorField');
         this.toggleSMSConfirmation(true);

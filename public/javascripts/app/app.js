@@ -57,22 +57,30 @@ ApplicationForm.Validators = {
 }
 
 ApplicationForm.addRegions({
-  formRegion: '#js-form',
   calculatorRegion: '#js-calculator',
   modalDialogRegion: '#js-modal-dialog'
 });
 
-ApplicationForm.Router = Marionette.AppRouter.extend({
-  appRoutes: {
-    "step/:n":        "getNextStep"
+// ApplicationForm.Router = Marionette.AppRouter.extend({
+//   appRoutes: {
+//     "step/:n":        "changeStep"
+//   }
+// });
+
+ApplicationForm.getModel = function() {
+  if(ApplicationForm._model)
+    return ApplicationForm._model;
+  else {
+    ApplicationForm._model = new ApplicationForm.Entities.Application();
+    return ApplicationForm._model;
   }
-});
+}
 
 ApplicationForm.on("start", function (argument) {
-  new ApplicationForm.Router({ controller: ApplicationForm.Controllers.ModalController });
+  // new ApplicationForm.Router({ controller: ApplicationForm.Controllers.ModalController });
 
-  if(Backbone.history)
-    Backbone.history.start();
+  // if(Backbone.history)
+  //   Backbone.history.start();
 
   ApplicationForm.Controllers.CalculatorController.initialize();
 });

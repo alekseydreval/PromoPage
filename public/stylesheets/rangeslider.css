@@ -1,0 +1,58 @@
+.rangeslider,
+.rangeslider__fill {
+  background-color: #e0e0e0;
+  display: block;
+  height: 10px;
+  width: 100%;
+  -moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+.rangeslider {
+  position: relative;
+  cursor: pointer;
+}
+
+.rangeslider--disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  opacity: 0.4;
+}
+
+.rangeslider__fill {
+  background-image: linear-gradient(to right,#b22430 0,#e52e3d 100%);
+  position: absolute;
+  top: 0;
+}
+
+.rangeslider__handle {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  border-radius: 20px;
+  height: 20px;
+  width: 20px;
+  background-color: #e52e3d;
+  border: 1px #cc2936 solid;
+  box-shadow: 0 1px 0 rgba(255,255,255,.4),0 0 2px rgba(255,255,255,.2)inset;
+}
+
+.rangeslider__handle:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 10px;
+  width: 12px;
+  height: 12px;
+  background-image: linear-gradient(to bottom,#fff 0,#f5f5f5 100%);
+  background-repeat: repeat-x;
+}
+
+input[type="range"]:focus + .rangeslider .rangeslider__handle {
+  -moz-box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
+  -webkit-box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
+}

@@ -1,9 +1,5 @@
 ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, Backbone, Marionette, $, _) {
   
-  var getModel = function() {
-    return new ApplicationForm.Entities.Application();
-  }
-
   var saveChanges = function(modelAttributes, nextStep) {
     localStorage.setItem('nextApplicationStep', nextStep);
     localStorage.setItem('applicationData', modelAttributes);
@@ -11,15 +7,32 @@ ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, B
 
   var processNextStep = function(model, data) {
     saveChanges(model.attributes, data.nextStep);
-    Backbone.history.navigate('step/' + data.nextStep);
+    // Backbone.history.navigate('step/' + data.nextStep);
   }
 
 
   Controllers.ModalController = {
 
-    getNextStep: function(id) {
-      var stepId = id || localStorage.getItem('nextApplicationStep') || 1;
-      var step = new ApplicationForm.Views.Steps[stepId]({ submitButton: "Далее", model: getModel() });
+    showModal: function() {
+      var modalView = new ApplicationForm.Views.ModalDialog({ model: ApplicationForm.getModel() });
+      ApplicationForm.modalDialogRegion.show(modalView);
+      
+      modalView.form.show(this.getNextStepView());
+      modalView.information.show(new ApplicationForm.Views.ModalDialogInfo({ model: ApplicationForm.getModel() }));
+    },
+
+    // changeStep: function(){
+    //   modalView.form.show(this.getNextStepView());
+    // },
+
+    getNextStepView: function() {
+      var stepId = localStorage.getItem('nextApplicationStep') || 1;
+      var step   = new ApplicationForm.Views.Steps[stepId]({ submitButton: "Далее", model: ApplicationForm.getModel() });
+
+      // step.on('processNextStep', function() {
+      //   processNextStep();
+      // });
+
 
       step.on('submit', function(e) {
         step.commit();

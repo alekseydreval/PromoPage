@@ -2,16 +2,14 @@ ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, B
 
   Controllers.CalculatorController = {
     initialize: function() {
-      var calculator = new ApplicationForm.Views.Calculator();
+      var calculator = new ApplicationForm.Views.Calculator({ model: ApplicationForm.getModel()});
       ApplicationForm.calculatorRegion.show(calculator);
-
-      var modal = new ApplicationForm.Views.ModalDialog();
-      ApplicationForm.modalDialogRegion.show(modal);
+      
+      calculator.initSlider();
 
       calculator.on('showModal', function() {
-        modal.show();
+        Controllers.ModalController.showModal();
       });
-
 
     }
   }

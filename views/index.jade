@@ -17,12 +17,8 @@ block content
           div.dialog
             div.ineed
               span Мне нужно:
-              span.sum 20000 &#8399;
-
-              div.slider(id="dragdealer-slider")
-                div.line.basic
-                div.line.current
-                  div.marker: div
+              span.sum(id='js-loan-amount') 20000 &#8399;
+              input(class='rangeslider', type='range', min="1000", max="30000", step="500", value="20000", data-rangeslider)
 
             div.terms
               div.pattern-cell
@@ -76,7 +72,8 @@ block content
       img(src="img/logo-min-red.png")
       div.section
         div.title: span Сумма займа:
-        div.text: span 20000 рублей
+        div.text
+         span <%= loanAmount %> рублей
       
       div.section
         div.title: span Вернуть до:

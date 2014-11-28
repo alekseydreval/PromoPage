@@ -9,26 +9,30 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
     },
 
     onRender: function() {
+      $('.overlay.dark').show();
+      $('.window').show();
+
       this.$el.addClass('pattern-cell');
       var t = this;
 
       $('body').on('click', function(e) {
-        if(e.target.className.match(/window|pattern-cell|overlay/))
-          t.hide();
+        if(e.target.className.match(/window|pattern-cell|overlay/)) {
+          $('.overlay.dark').hide();
+          $('.window').hide();
+
+          t.destroy();
+        }
       });
     },
 
-    show: function() {
-      $('.overlay.dark').show();
-      $('.window').show();
+    showForm: function() {
       this.form.show(ApplicationForm.Controllers.ModalController.getNextStep());
-    },
-
-    hide: function() {
-      $('.overlay.dark').hide();
-      $('.window').hide();
     }
 
+  });
+
+  Views.ModalDialogInfo = Marionette.ItemView.extend({
+    template: "#modal-info-template"
   });
 
 });
