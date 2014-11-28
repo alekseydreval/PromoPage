@@ -44,6 +44,9 @@
 
 	@textbox-height-default: 50px;
 
+	@circle-size-medium: 50px;
+	@circle-size-large: 60px;
+
 	@border-width-default: 1px;
 	@border-radius-default: 4px;
 
@@ -58,7 +61,7 @@
 	@font-size-default: 16px;
 	@font-size-alt: 12px;
 
-	@font-size-medium: 24px;
+	@font-size-medium: @font-size-default*1.5;
 
 	// Icon
 	@icon-size-default: 16px;
@@ -137,47 +140,10 @@
 		}
 
 		.feedback {
-			position: absolute;
-			right: @grid-gutter-width/2;
-			top: 0;
-
 			height: @header-height-default;
 
 			.callback {
-				position: relative;
-				padding-left: @button-height-default + @indent-small;
-
-				.circle {
-					position: absolute;
-					top: (@header-height-default - @button-height-default)/2;
-					left: 0;
-
-					border: @border-width-default*2 @white-color-default solid;
-					box-shadow: @shadow-black-default;
-
-					.circle(@button-height-default/2);
-				}
-
-				.phone {
-					&>*:first-child { font-size: @font-size-small; }
-
-					&>*:last-child {
-						display: block;
-						margin-top: -3px;
-
-						font-weight: bold;
-						font-size: 18px;
-					}
-				}
-			}
-
-			.callme {
-				padding-left: 36px;
-
-				button {
-					height: @button-height-default;
-					padding: 0 13px;
-				}
+				.circle { top: (@header-height-default - @button-height-default)/2; }
 			}
 		}
 	}
@@ -297,23 +263,13 @@
 				left: 0;
 				top: 0;
 
-				.pattern-cell {
-					height: 100%;
+				.pattern-cell { height: 100%; }
 
-					&>div>* {
-						&:not(:last-child) {
-							margin-bottom: @indent-default*2;
-						}
-					}
-				}
-
-				.title {
-					font-family: @font-family-alt;
-					font-size: @font-size-default*3;
-					font-weight: bold;
-				}
+				.separator { margin: 23px 0 23px 0; }
 
 				.text { font-weight: bold; }
+
+				p { font-weight: bold; }
 			}
 		}
 
@@ -366,36 +322,43 @@
 		}
 
 		.description {
-			padding: 85px 0 100px 0;
+			background-color: @white-color-alt;
 			box-shadow: 0 1px 3px rgba(0,0,0,0.2) inset;
 
-			.title {
-				font-size: @font-size-default*3;
-				font-weight: bold;
-				margin-bottom: 16px;
+			.container {
+				position: relative;
+				padding-top: 85px;
+				padding-bottom: 100px;
+
+				.dude {
+					position: absolute;
+					right: @grid-gutter-width/2;
+					bottom: 0;
+				}
 			}
 
-			p {
-				margin-top: 24px;
-				margin-bottom: 0;
-			}
+			.separator { margin: 23px 0 23px 0; }
 
 			ul {
 				display: table;
 				padding-left: 0;
-				margin: 0;
+				margin: 22px 0 0 0;
 
 				list-style-type: none;
 
 				li {
 					display: table-row;
 
+					&:not(:last-child) {
+						&>div { padding-bottom: 10px; }	
+					}
+
 					&>div {
 						display: table-cell;
 						vertical-align: middle;
 
 						&:first-child {
-							font-size: @icon-size-default*2;
+							font-size: @icon-size-default*1.5;
 							color: @red-color-default;
 
 							padding-right: 12px;
@@ -407,18 +370,219 @@
 						}
 					}
 				}
-
 			}
 		}
 	}
 
-	&.scroll-clear {
-		position: fixed;
-		left: 0;
-		top: 0;
+	// Video presentation
 
+	.video {
+		#gradient>.vertical(@white-color-default, @white-color-alt, 0%, 100%);
+
+		a {
+			margin: 0 auto;
+			text-decoration: none;
+
+			padding: 100px 0;
+
+			.circle {
+				.circle(@circle-size-large/2, 0);
+
+				background-color: @red-color-default;
+				text-shadow: @shadow-black-default;
+				color: @white-color-default;
+			}
+
+			.text {
+				padding-left: @indent-small*2;
+
+				span {
+					&:first-child {
+						font-size: @font-size-small;
+						font-weight: bold;
+
+						color: @red-color-default;
+					}
+
+					&:last-child {
+						display: block;
+						margin-top: -5px;
+
+						font-size: @font-size-large;
+						font-weight: bold;
+
+						color: #000;
+					}
+				}
+			}
+
+			&:hover {
+				.text span {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	// Why choose us?
+
+	.why {
+		background: url(../img/texture.jpg);
+		color: @white-color-default;
+		text-shadow: @shadow-black-default;
+
+		padding: 83px 0 100px 0;
+
+		.briefly {
+			text-align: center;
+			margin-bottom: 56px;
+
+			.separator { margin: 24px auto 20px auto; }
+
+			.text {
+				font-size: @font-size-medium;
+				line-height: @font-size-medium + 2;
+			}
+		}
+
+		.detail {
+			position: relative;
+			padding-left: @circle-size-medium + @indent-small*2;
+
+			.circle {
+				position: absolute;
+				left: 0;
+				top: 0;
+
+				border: @border-width-default*2 @white-color-default solid;
+				box-shadow: @shadow-black-default;
+				text-shadow: @shadow-black-default;
+
+				.circle(@circle-size-medium/2);
+
+				i { font-size: @icon-size-default*1.5; }
+			}
+
+			.title {
+				line-height: @circle-size-medium;
+				font-size: @font-size-large;
+				font-weight: bold;
+
+				margin-bottom: 6px;
+			}
+		}
+	}
+
+	// Reviews
+
+	.reviews {
+		padding: 83px 0 99px 0;
+
+		.separator {
+			margin: 24px auto 23px auto;
+		}
+
+		.review {
+			border-bottom: @border-width-default @gray-color-light-alt dotted;
+			padding-bottom: @indent-default*2;
+
+			p {
+				text-align: center;
+				&:not(:last-child) { padding-bottom: @indent-small*2; }
+			}
+
+			.author {
+				margin-top: -3px;
+				margin-left: auto;
+				margin-right: auto;
+
+				.photo { padding-right: @indent-small; }
+
+				span {
+					font-size: @font-size-small;
+
+					&.name {
+						color: @red-color-default;
+						font-weight: bold;
+					}
+
+					&.date {
+						display: block;
+						margin-top: -2px;
+					}
+				}
+			}
+
+			&:not(:last-child) { margin-bottom: 23px; }
+		}
+
+		.more {
+			display: block;
+			text-align: center;
+
+			margin-top: -1px;
+
+			color: @red-color-default;
+			text-decoration: none;
+
+			font-size: @font-size-small;
+			font-weight: bold;
+
+			span { border-bottom: @border-width-default @red-color-default dotted; }
+		}
+
+		h6 { text-align: center; }
+
+	}
+
+	// Information on the number of clients
+
+	.clients {
+		background: url(../img/mln_bg.jpg) center top no-repeat;
+		color: @white-color-default;
+
+		text-align: center;
+		height: 480px;
 		width: 100%;
-		height: 100%;
+
+		.separator { margin: 24px auto 20px auto; }
+
+		.text {
+			font-size: @font-size-medium;
+			line-height: @font-size-medium + 2;
+		}
+	}
+
+	// The bottom block
+
+	.footer {
+		background: url(../img/texture_footer.jpg);
+		padding: @indent-small*5 0;
+
+		color: @white-color-default;
+
+		.container { position: relative; }
+
+		.copy {
+			text-shadow: @shadow-black-default;
+
+			i {
+				font-size: @font-size-default*2.5;
+				color: @red-color-default;
+			}
+
+			span {
+				font-size: @font-size-small;
+				line-height: @font-size-alt + 2;
+				font-weight: bold;	
+			}
+
+			&>*:first-child { padding-right: @indent-default; }	
+		}
+
+		.callme {
+			button { color: @white-color-default; }
+		}
 	}
 }
 

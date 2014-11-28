@@ -1,12 +1,80 @@
+.feedback {
+	position: absolute;
+	right: @grid-gutter-width/2;
+	top: 0;
+
+	.callback {
+		position: relative;
+		padding-left: @button-height-default + @indent-small;
+
+		.circle {
+			position: absolute;
+			left: 0;
+
+			border: @border-width-default*2 @white-color-default solid;
+			box-shadow: @shadow-black-default;
+
+			.circle(@button-height-default/2);
+
+			color: @white-color-default;
+		}
+
+		.phone {
+			&>*:first-child { font-size: @font-size-small; }
+
+			&>*:last-child {
+				display: block;
+				margin-top: -3px;
+
+				font-weight: bold;
+				font-size: 18px;
+			}
+		}
+	}
+
+	.callme {
+		padding-left: 36px;
+
+		button {
+			height: @button-height-default;
+			padding: 0 13px;
+		}
+	}
+}
+
 .separator {
 	width: 62px;
 
 	&.white {
-		border-bottom: @border-width-default @white-color-default dotted;
+		border-bottom: @border-width-default*2 @white-color-default dotted;
 		box-shadow: @shadow-black-default;
 	}
 
 	&.red {
-		border-bottom: @border-width-default @red-color-default dotted;
+		border-bottom: @border-width-default*2 @red-color-default dotted;
 	}
+}
+
+.scroll-clear {
+	position: fixed;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	height: 100%;
+}
+
+h6 {
+	margin: 0;
+
+	font-size: @font-size-default*3;
+	font-family: @font-family-alt;
+	font-weight: bold;
+
+	line-height: @font-size-default*3 + 2;
+}
+
+p {
+	margin: 0;
+	line-height: @font-size-default + 2;
 }
