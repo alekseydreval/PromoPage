@@ -15,6 +15,7 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     events: {
       "blur #js-fio-field"   : "autocompleteName",
       "blur #js-phone-field" : "autocompletePhone",
+      "keydown #js-phone-field" : "correctPhone"
     },
 
     modelEvents: {
@@ -111,6 +112,47 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
         }
       });
     },
+
+    correctPhone: function (e) {
+      var charToValidate = String.fromCharCode(e.keyCode);
+      var currentCarretPos = this.ui.phone.val().length ;
+      var chunkToAppend = '';
+      var mask = '+d (ddd) ddd-dd-dd';
+      var stopChars = '+ ()-';
+      var incorrectInput = false;
+
+      if(_.include([39, 38, 37, 40, 93, 17, 18, 9, 27, 112, 8], e.keyCode) || e.shiftKey)
+        return;
+
+      if(mask[currentCarretPos] == '+') {
+        if(charToValidate == '+')
+          chunkToAppend = '+';
+        else if(_.include(['7', '8'], charToValidate))
+          chunkToAppend = '+ ' + charToValidate;
+        else
+          incorrectInput = true;
+      } else if(_.include(stopChars, mask[currentCarretPos]))
+          if(!_.include(stopChars, charToValidate )) {
+            while(_.include(stopChars, mask[currentCarretPos])) {
+              chunkToAppend += mask[currentCarretPos];
+            }
+            if(_.isNumber(Number.parseInt(charToValidate)))
+              chunkToAppend += charToValidate;
+          }
+          else
+            incorrectInput = true;
+        else if(mask[currentCarretPos] == 'd')
+          if(_.isNumber(Number.parseInt(charToValidate)))
+            chunkToAppend = charToValidate;
+          else
+            incorrectInput = true;
+
+      e.preventDefault();
+
+      if(!incorrectInput)
+        this.ui.phone.val(this.ui.phone.val() + chunkToAppend);
+
+    }
 
   });
     
