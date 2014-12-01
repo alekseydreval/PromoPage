@@ -1,0 +1,41 @@
+.rangeslider,
+.rangeslider__fill {
+  height: @slider-height-default;
+  width: 100%;
+
+  border-radius: @border-radius-default;
+  background-color: @gray-color-light;
+
+  cursor: pointer;
+}
+
+.rangeslider { position: relative; }
+
+.rangeslider--disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  opacity: 0.4;
+}
+
+.rangeslider__fill {
+  position: absolute;
+  top: 0;
+
+  #gradient>.horizontal(@red-color-dark, @red-color-light, 0%, 100%);
+}
+
+.rangeslider__handle {
+  position: absolute;
+
+  background-image: url(../img/polzun.png);
+  background-size: cover;
+  
+  border: @border-width-default @red-color-default solid;
+  box-shadow: @shadow-white-default, 0 0 2px rgba(255,255,255,0.2) inset;
+
+  width: @slider-height-default*2;
+  height: @slider-height-default*2;
+
+  top: -@slider-height-default/2;
+
+  border-radius: 50%;
+}

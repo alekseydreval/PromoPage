@@ -11,4 +11,16 @@ $(document).ready(function() {
 			}
 		]
 	});
+
+	$('input[type="range"]').rangeslider({
+		polyfill: false
+	});
+
+	$('.datepicker').pickadate({
+		min: 1,
+		max: 17,
+		today: "",
+		clear: "",
+		close: ""
+	});
 });

@@ -30,15 +30,12 @@ html
               span 20000
               span &nbsp;&#8399;
 
-            div.slider
-              div.line.basic
-              div.line.current(style="width: 50%;")
-                div.marker: div
+            input(type="range" min="5000" max="30000" step="500")
 
           div.terms
             div.pattern-cell
               div Готов вернуть:
-              div: button.clear.link: span 12 декабря 2014
+              div: input(type="text").datepicker
 
             div.pattern-cell
               div Сумма процентов по займу:

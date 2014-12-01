@@ -1,0 +1,49 @@
+.picker {
+  position: absolute;
+  width: 100%;
+
+  z-index: 10000;
+  
+  .user-select(none);
+
+  &:not(.picker--opened) .picker__holder{
+    -webkit-transform: translateY(-1em) perspective(600px) rotateX(10deg);
+    -moz-transform: translateY(-1em) perspective(600px) rotateX(10deg);
+    transform: translateY(-1em) perspective(600px) rotateX(10deg);
+
+    -webkit-transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s 0.15s, border-width 0s 0.15s;
+    -moz-transition: -moz-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s 0.15s, border-width 0s 0.15s;
+    transition: transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s 0.15s, border-width 0s 0.15s;
+
+    max-height: 0;
+    opacity: 0;
+  }
+
+  &.picker--opened .picker__holder {
+    -webkit-transform: translateY(0) perspective(600px) rotateX(0);
+    -moz-transform: translateY(0) perspective(600px) rotateX(0);
+    transform: translateY(0) perspective(600px) rotateX(0);
+
+    -webkit-transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s, border-width 0s;
+    -moz-transition: -moz-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s, border-width 0s;
+    transition: transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s, border-width 0s;
+
+    opacity: 1;
+  }
+}
+
+.picker__holder {
+  border-radius: @border-radius-default;
+  box-shadow: @shadow-black-substrate;
+
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+
+  width: 100%;
+}
+
+.picker__holder {
+  position: absolute;
+  background: @white-color-default;
+  .user-select(none);
+}

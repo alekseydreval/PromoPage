@@ -1,0 +1,108 @@
+.picker__box { padding: @indent-default; }
+
+.picker__header {
+  position: relative;
+  text-align: center;
+
+  font-size: 0;
+
+  margin-bottom: @indent-small;
+}
+
+.picker__month, .picker__year {
+  display: inline-block;
+  font-size: @font-size-default;
+  line-height: @font-size-default + 2;
+
+  font-weight: bold;
+}
+
+.picker__year {
+  margin-left: @indent-small/2;
+}
+
+.picker__nav--prev, .picker__nav--next {
+  position: absolute;
+  top: 0;
+
+  font-size: @icon-size-default/1.5;
+  text-align: center;
+
+  &:not(.picker__nav--disabled) {
+    color: @gray-color-default;
+    cursor: pointer;
+  }
+
+  &.picker__nav--disabled {
+    color: @gray-color-light;
+  }
+
+  &:before {
+    font-family: 'rdfont';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    line-height: @font-size-default + 2px;
+  }
+}
+
+.picker__nav--prev {
+  left: 0;
+
+  &:before { content: "\e600"; }
+}
+
+.picker__nav--next {
+  right: 0;
+
+  &:before { content: "\e608"; }
+}
+
+.picker__table {
+  border-spacing: @border-width-default;
+  border-collapse: separate;
+  table-layout: fixed;
+
+  text-align: center;
+  width: 100%;
+
+  td, th {
+    font-weight: bold;
+    padding: 0;
+
+    line-height: 30px;
+  }
+}
+
+.picker__weekday {
+}
+
+.picker__day {
+  padding: 0;
+
+  &.picker__day--today {
+    position: relative;
+    background-color: @white-color-alt;
+  }
+
+  &.picker__day--outfocus { color: @gray-color-light-alt; }
+
+  &.picker__day--infocus {
+    color: @gray-color-default;
+    cursor: pointer;
+  }
+
+  &.picker__day--disabled { color: @gray-color-light; }
+
+  &.picker__day--selected {
+    background-color: @red-color-default;
+    color: @white-color-default;
+
+    text-shadow: none;
+  }
+}

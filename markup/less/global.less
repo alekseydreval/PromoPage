@@ -70,6 +70,13 @@
 // Bootstrap
 @import "bootstrap/bootstrap";
 
+// Icon framework: RDFont
+@import "components/rdfont";
+
+// Import art font
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500&subset=latin,cyrillic);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic);
+
 // Slick slider
 @import "components/slick-slider";
 
@@ -77,16 +84,15 @@
 @import "components/textbox";
 @import "components/dialogs";
 @import "components/buttons";
-@import "components/slider";
 
 @import "components/not-sorted";
 
-// Icon framework: RDFont
-@import "components/rdfont";
+// RangeSlider plugin
+@import "components/rangeslider";
 
-// Import art font
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,500&subset=latin,cyrillic);
-@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic);
+// Pickadate plugin
+@import "components/pickadate/classic";
+@import "components/pickadate/classic.date.less";
 
 // Landing page
 * {
@@ -191,7 +197,13 @@
 				padding-top: 18px;
 
 				.pattern-cell {
+					position: relative;
 					width: 100%;
+
+					.picker {
+						left: 0;
+						top: 24px;
+					}
 
 					&>*:last-child { text-align: right; }
 
@@ -206,13 +218,19 @@
 					}
 				}
 
-				.link {
+				.datepicker {
 					background-color: transparent;
-					border-bottom-color: @red-color-default;
-
-					font-weight: bold;
-					font-size: @font-size-default;
 					color: @red-color-default;
+					border: none;
+					
+					padding: 0;
+					margin: 0;
+
+					text-align: right;
+					font-weight: bold;
+					cursor: pointer;
+
+					.user-select(none);
 				}
 
 				button {
