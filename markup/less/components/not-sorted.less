@@ -64,6 +64,29 @@
 	height: 100%;
 }
 
+.checkbox {
+	display: inline-block;
+	cursor: pointer;
+
+	background-color: @white-color-alt;
+	border-radius: @border-radius-default;
+	box-shadow: @shadow-black-inset inset;
+
+	text-align: center;
+	line-height: 20px;
+	width: 20px;
+
+	i {
+		text-shadow: @shadow-white-default;
+		font-size: @icon-size-default*0.5;
+		color: @gray-color-default;
+
+		padding-left: 1px;
+	}
+
+	&:not(.checked) i { display: none; }
+}
+
 h6 {
 	margin: 0;
 
@@ -76,7 +99,12 @@ h6 {
 
 p {
 	margin: 0;
-	line-height: @font-size-default + 2;
+
+	&:not(.small) { line-height: @font-size-default + 2; }
+	&.small {
+		font-size: @font-size-small;
+		line-height: @font-size-small + 2;
+	}
 }
 
 input {

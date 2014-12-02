@@ -16,6 +16,11 @@
 
 		box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05) inset;
 
+		i {
+			font-size: @icon-size-default*2.5;
+			color: @red-color-default;
+		}
+
 		.section {
 			.title { font-size: @font-size-small; }
 			.text { font-weight: bold; }
@@ -39,11 +44,28 @@
 		width: 830px;
 
 		.title {
-			font-size: @font-size-large;
-			font-weight: bold;
-
+			position: relative;
 			padding-bottom: @indent-default*2;
 			border-bottom: @border-width-default @gray-color-light-alt dotted;
+
+			span {
+				font-size: @font-size-large;
+				line-height: @font-size-large;
+				font-weight: bold;
+			}
+
+			button {
+				position: absolute;
+				right: 0;
+				top: 0;
+
+				height: @font-size-large;
+
+				background-color: transparent;
+				border: none;
+
+				&:not(:hover) { color: @gray-color-default; }
+			}
 		}
 
 		.section {
@@ -56,21 +78,44 @@
 			}
 
 			.textbox {
-				&:not(:last-child) {
-					margin-bottom: @indent-default*2;
-				}
-
 				input {
 					background-color: @white-color-alt;
 					border: none;
 
 					box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset;
 				}
+
+				&:not(:last-child) { margin-bottom: @indent-default*2; }
+				&.not-valid {
+					input { border: @border-width-default @red-color-default solid; }
+				}
+				&.valid {
+					input { border: @border-width-default @green-color-default solid; }
+				}
+			}
+
+			button {
+				&:not(.rectangular) {
+					padding: 0 @indent-default;
+					height: 50px;
+
+					font-weight: bold;
+				}
 			}
 		}
 
 		.agreement {
-			padding-top: @indent-default*2;
+			position: relative;
+
+			margin-top: @indent-default*2;
+
+			padding-left: 20px + @indent-small;
+
+			.checkbox {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
 
 			span {
 				font-size: @font-size-alt;
@@ -78,6 +123,15 @@
 			}
 		}
 
+		.sms-confirmation {
+			margin-top: @indent-default*2;
+
+			.textbox {
+				margin-right: @indent-small;
+				width: 190px;
+				float: left;
+			}
+		}
 	}
 }
 

@@ -1,0 +1,49 @@
+div.overlay.dark
+
+div.window
+  div.pattern-cell: div
+    div.dialog.without
+      div.request-loan
+        div.information
+          i.icon-logo-znak
+          div.section
+            div.title: span Сумма займа:
+            div.text: span 20000 рублей
+          
+          div.section
+            div.title: span Вернуть до:
+            div.text: span 30.02.2015 г.
+
+          div.section
+            div.title: span Сумма возврата:
+            div.text: span 22400 рублей
+
+        div.content
+          div.title
+            span Шаг 1 из 4  —  Контактные данные
+            button.clear: i.icon-close
+
+          div
+            div.section
+              div.caption: span ФИО:
+              div.textbox.valid: input(type="text", placeholder="Введите вашу фамилию, имя и отчество", value="Чунихин Данил Владимирович")
+
+              div.caption: span Номер мобильного телефона:
+              div.textbox
+                input(type="text", placeholder="+7")
+                div.toolbar
+                  button(disabled).rectangular.red
+                    span Подтвердить номер телефона
+
+            div.section
+              p.small На указанный Вами номер телефона отправлено SMS с кодом подтверждения.<br>Напишите код из SMS в специальное поле ниже и нажмите кнопку «Продолжить».<br>Получить код повторно можно будет через <span>01:37</span>
+
+              div.sms-confirmation
+                div.textbox.not-valid: input(type="text", placeholder="Код из SMS")
+                button(disabled).red
+                  span Продолжить
+
+            div.agreement
+              div.checkbox.checked: i.icon-checkbox
+
+              span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.
