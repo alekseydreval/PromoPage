@@ -29,7 +29,7 @@ ApplicationForm.module('Entities', function (Entities, ApplicationForm, Backbone
     calculateOverhead: function () {
       return Math.ceil(
               this.get('percentRate') * this.get('loanAmount') * 
-              (this.get('loanRepayDate') - this.get('dateNow')) / (1000*60*60*24)
+              Math.ceil((this.get('loanRepayDate') - this.get('dateNow')) / (1000*60*60*24))
              );
     },
 
