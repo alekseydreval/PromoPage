@@ -133,9 +133,9 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
           incorrectInput = true;
       } else if(_.include(stopChars, mask[currentCarretPos]))
           if(!_.include(stopChars, charToValidate )) {
-            while(_.include(stopChars, mask[currentCarretPos])) {
-              chunkToAppend += mask[currentCarretPos];
-            }
+            while(_.include(stopChars, mask[currentCarretPos]))
+              chunkToAppend += mask[currentCarretPos++];
+
             if(_.isNumber(Number.parseInt(charToValidate)))
               chunkToAppend += charToValidate;
           }
