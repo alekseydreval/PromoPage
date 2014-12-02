@@ -43,7 +43,7 @@ block content
                 div Сумма процентов по займу:
                 div
                   strong(id='js-overhead-info') <%= calculateOverhead() %> 
-                    span &#8399;
+                  strong &nbsp;&#8399;
 
               button.large.red(id='js-modal-trigger')
                 span Получить деньги
@@ -235,7 +235,7 @@ block content
             div.content(id='js-modal-form')
 
     script(type='text/template', id='modal-info-template')
-      img(src="img/logo-min-red.png")
+      i.icon-logo-znak
       div.section
         div.title: span Сумма займа:
         div.text
@@ -253,7 +253,10 @@ block content
 
 
     script(type='text/template', id='modal-form-1-template')
-      div.title: span Шаг 1 из 4  —  Контактные данные
+      div.title
+        span Шаг 1 из 4  —  Контактные данные
+        button.clear: i.icon-close
+      
       div
         div.section
           div.caption: span ФИО:

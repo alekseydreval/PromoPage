@@ -8,21 +8,29 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
       form:        "#js-modal-form"
     },
 
+    events: {
+      "click .icon-close": "hideModal"
+    },
+
+    hideModal: function() {
+
+      $('.overlay.dark').hide();
+      $('.window').hide();
+      $('body').removeClass('scroll-clear');
+
+      window.scrollTo(1, this.scrollY);
+
+      this.destroy();
+    },
+
     onRender: function() {
+      this.scrollY = window.scrollY;
+      
       $('.overlay.dark').show();
       $('.window').show();
+      $('body').addClass('scroll-clear');
 
       this.$el.addClass('pattern-cell');
-      var t = this;
-
-      $('body').on('click', function(e) {
-        if(e.target.className.match(/window|pattern-cell|overlay/)) {
-          $('.overlay.dark').hide();
-          $('.window').hide();
-
-          t.destroy();
-        }
-      });
     },
 
     showForm: function() {
