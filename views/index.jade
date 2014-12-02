@@ -255,7 +255,8 @@ block content
     script(type='text/template', id='modal-form-1-template')
       div.title
         span Шаг 1 из 4  —  Контактные данные
-        button.clear: i.icon-close
+        button.clear(id='js-modal-close')
+          i.icon-close
       
       div
         div.section

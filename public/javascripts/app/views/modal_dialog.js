@@ -9,7 +9,7 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
     },
 
     events: {
-      "click .icon-close": "hideModal"
+      "click #js-modal-close": "hideModal"
     },
 
     hideModal: function() {
