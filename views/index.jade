@@ -11,53 +11,219 @@ block content
             span Ваш город:
             button.clear.link: span Архангельск
 
+        div.pattern-cell.feedback
+          div.callback
+            div.circle: i.icon-phone
+            div.phone
+              span Бесплатная линия
+              span 8 800 200-50-51
+
+          div.callme
+            button.white: span Заказать звонок
+
       div(id='js-calculator')
+
       script(type='text/template', id='js-calculator-template')
-        div(class="loan "): div.container
+        div.loan: div.container
           div.dialog
             div.ineed
               span Мне нужно:
-              span.sum(id='js-loan-amount') 20000 &#8399;
-              input(class='rangeslider', type='range', min="1000", max="30000", step="500", value="20000", data-rangeslider)
+              span.sum
+                span(id='js-loan-info') 20000
+                span &nbsp;&#8399;
+
+              input(type="range" min="1000", max="17000", step="500", value="5000")
 
             div.terms
               div.pattern-cell
                 div Готов вернуть:
-                div: button.clear.link: span 12 декабря 2014
+                div: input(type="text").datepicker
 
               div.pattern-cell
                 div Сумма процентов по займу:
-                div: strong 2400 &#8399;
+                div
+                  strong(id='js-overhead-info') <%= calculateOverhead() %> 
+                    span &#8399;
 
-              button.big.red
+              button.large.red(id='js-modal-trigger')
                 span Получить деньги
 
-            div.details Нажимая кнопку «Получить деньги», Вы подтверждаете, что знаете и принимаете Правила предоставления микрозаймов и полностью согласны с Политикой использования персональных данных.
+            div.details Нажимая кнопку «Получить деньги», Вы подтверждаете, что знаете и принимаете <a href="/">Правила предоставления микрозаймов</a> и полностью согласны с <a href="">Политикой использования персональных данных</a>.
 
       div.slides
-        - promos.forEach(function(promo) {
-          div.slide
-            div.background(style="background-image: url(#{promo.backgroundImage})")
-
-            div.description
-              div.container
-                div.pattern-cell: div
-                  div.title!= promo.title
-                  div.separator
-                  div.text!= promo.body
-
-        - });
         div.slide
           div.background(style="background-image: url(img/slide1.jpg)")
 
           div.description
             div.container
               div.pattern-cell: div
-                div.title Подарок для<br>любимой
-                div.separator
-                div.text В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
+                h6 Подарок для<br>любимой
+                div.separator.white
+                p В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
 
-    div.overlay.dark(style="display: none;")
+        div.slide
+          div.background(style="background-image: url(img/slide1.jpg)")
+
+          div.description
+            div.container
+              div.pattern-cell: div
+                h6 Подарок для<br>любимой
+                div.separator.white
+                p В будничной суете совсем забыли о важной дате?<br>До зарплаты осталось всего несколько дней?<br>Мы работаем, чтобы помогать Вам быстро<br>находить выход из подобных ситуаций.
+
+    div.wrapper.quickly-easily
+      div.key-steps: div.container
+        div.row
+          div.col-lg-4
+            div.pattern-cell
+              div.step-icon: i.icon-form
+              div.step-text
+                span Первый шаг:
+                br
+                span Отправьте заявку<br>прямо сейчас
+
+          div.col-lg-4
+            div.pattern-cell
+              div.step-icon: i.icon-time
+              div.step-text
+                span Второй шаг:
+                br
+                span Одобрение заявки<br>в течение 10 минут
+
+          div.col-lg-4
+            div.pattern-cell
+              div.step-icon: i.icon-wallet
+              div.step-text
+                span Третий шаг:
+                br
+                span Выдача денежных<br>средств
+
+      div.description: div.container
+        div.row
+          div.col-lg-6
+            h6 Быстро и просто
+            div.separator.red
+            p Многолетний опыт работы в сфере микрофинансирования и доведённые до совершенства алгоритмы работы позволяют нам на высочайшем уровне и в кратчайшие сроки помогать людям в решении их финансовых проблем.
+            ul
+              li
+                div: i.icon-check
+                div Займы от 1000 до 30000 рублей
+
+              li
+                div: i.icon-check
+                div Срок займа — от 1 до 17 дней
+
+              li
+                div: i.icon-check
+                div Без комиссий и справок о доходах
+
+              li
+                div: i.icon-check
+                div Улучшаем кредитную историю
+
+              li
+                div: i.icon-check
+                div 90% заявок одобрено
+
+        div.dude: img(src="img/dude.png")
+
+    div.wrapper.video
+      a(href="/").pattern-cell
+        div.circle: i.icon-play
+        div.text
+          span О нашей компании за 45 секунд:
+          span Посмотрите видео-презентацию
+
+    div.wrapper.why
+      div.container
+        div.row.briefly
+          h6 Почему нас выбирают?
+          div.separator.white
+          div.text Мы — надёжная федеральная микрофинансовая компания.<br>Наша миссия — предоставлять людям лёгкий и современный способ<br>получения денежных средств.
+
+        div.row
+          div.col-lg-4
+            div.detail
+              div.circle: i.icon-client
+              div.content
+                div.title Клиенториентированность
+                p Вектор развития нашего бизнеса — клиент. Мы знаем, чем живут наши клиенты, умеем поставить себя на их место и постоянно совершенствуем свою работу, исходя из понимания реальных мотивов и потребностей наших клиентов.
+
+          div.col-lg-4
+            div.detail
+              div.circle: i.icon-shield
+              div.content
+                div.title Ответственность
+                p Сотрудники компании принимают принцип полной ответственности, начиная с себя и своей личной жизни и заканчивая работой в компании. Наша ответственность поддерживается и нашей исключительной обязательностью — мы всегда выполняем то, что обещали клиенту, руководителю, сотруднику или коллеге. Мы не боимся брать на себя ответственность, и делаем это осознанно там и тогда, когда это нужно для максимального соблюдения интересов клиентов.
+
+          div.col-lg-4
+            div.detail
+              div.circle: i.icon-star
+              div.content
+                div.title Развитие
+                p Мы не стоим на месте, а постоянно стремимся стать лучше во всех аспектах нашей деятельности. Думаем о личностном и профессиональном развитии сотрудников. Развитие для нас — это хобби по достижению все более высоких результатов.
+
+    div.wrapper.reviews
+      div.container: div.row
+        div.col-lg-3: img(src="img/testimonials_left.jpg")
+        div.col-lg-6
+          h6 Отзывы наших<br>клиентов
+          div.separator.red
+
+          div
+            div.review
+              p Я учусь в институте, и параллельно подрабатываю фрилансером. Официально на работе не зарегистрирована. Последнее время у меня начались проблемы со зрением, а в банке кредит не дали.
+              p Обратилась в компанию «Рос-Деньги», быстро получила займ и сделала операцию по смене пола. После этого пришла в военкомат и там мне сказали, что никаких проблем со зрением у меня нет. После армии я смогу продолжать обучение без ущерба для своего здоровья и смотреть в будущее не щурясь.
+              div.author.pattern-cell
+                div.photo: img(src="img/nophoto.jpg")
+                div
+                  span.name Барашкова Светлана
+                  span.date 1 июня 2014
+
+            div.review
+              p Взял займ в компани "Рос-Деньги" на ремонт автомобиля. Остался доволен. Сейчас выплачиваю маленькими платежами, стараюсь платить вперед – очень удобно.
+              div.author.pattern-cell
+                div.photo: img(src="img/nophoto.jpg")
+                div
+                  span.name Хрулёв Олег
+                  span.date 28 мая 2014
+
+            div.review
+              p Никогда не думал, что можно получить деньги в займ так просто. Обычно необходимо собрать кучу справок или привести поручителя — это долго и неприятно.
+              div.author.pattern-cell
+                div.photo: img(src="img/nophoto.jpg")
+                div
+                  span.name Строгов Алексей
+                  span.date 24 мая 2014
+
+            a(href="/").more: span Показать больше отзывов
+
+        div.col-lg-3: img(src="img/testimonials_right.jpg")
+
+      
+    div.wrapper.clients.pattern-cell: div
+      h6 Более 1млн. клиентов
+      div.separator.white
+      div.text Начиная с 2010 года, более одного миллиона человек в более чем<br>140 городах от Калининграда до Владивостока уже<br>воспользовались нашими услугами.
+
+    div.wrapper.footer
+      div.container
+        div.col-lg-4
+          div.copy.pattern-cell
+            div: i.icon-logo-znak
+            div: span © 2010 - 2014 Компания «РосДеньги».<br>Все права защищены.
+
+        div.pattern-cell.feedback
+          div.callback
+            div.circle: i.icon-phone
+            div.phone
+              span Бесплатная линия
+              span 8 800 200-50-51
+
+          div.callme
+            button.white: span Заказать звонок
+
+  div.overlay.dark(style="display: none;")
 
     div.window(style="display: none;", id="js-modal-dialog")
 
@@ -77,11 +243,13 @@ block content
       
       div.section
         div.title: span Вернуть до:
-        div.text: span 30.02.2015 г.
+        div.text
+          span <%= formattedRepayDate() %>
 
       div.section
         div.title: span Сумма возврата:
-        div.text: span 22400 рублей
+        div.text
+          span <%= loanAmount + calculateOverhead() %> рублей
 
 
     script(type='text/template', id='modal-form-1-template')

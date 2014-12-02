@@ -1,4 +1,3 @@
-doctype html
 html
   head
     title= title
@@ -6,14 +5,17 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="stylesheet" href="/stylesheets/global.css")
-    link(rel="stylesheet" href="/stylesheets/style.css")
-    link(rel="stylesheet" href="/stylesheets/rangeslider.css")
     script(src='./javascripts/vendor/jquery.js')
     script(src='./javascripts/vendor/lodash.js')
     script(src="./javascripts/vendor/backbone.js")
     script(src="./javascripts/vendor/backbone.marionette.js")
     script(src="./javascripts/vendor/backbone.forms.js")
     script(src="./javascripts/vendor/templates/bootstrap3.js")
+    script(src="./javascripts/vendor/picker.js")
+    script(src="./javascripts/vendor/picker.date.js")
+    script(src="./javascripts/vendor/translations/ru_RU.js")
+    script(src="./javascripts/vendor/slick.min.js")
+    script(src="./javascripts/vendor/rangeslider.js")
     script(src="./javascripts/app/app.js")
     script(src="./javascripts/app/controllers/modal_controller.js")
     script(src="./javascripts/app/controllers/calculator_controller.js")
@@ -21,8 +23,6 @@ html
     script(src="./javascripts/app/views/step1.js")
     script(src="./javascripts/app/views/calculator.js")
     script(src="./javascripts/app/views/modal_dialog.js")
-    script(src="./javascripts/vendor/slick.min.js")
-    script(src="./javascripts/vendor/rangeslider.js")
     script(src="./javascripts/app/init.js")
   block content
   script(type='text/javascript').

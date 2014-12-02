@@ -13,8 +13,8 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     },
 
     events: {
-      "blur #js-fio-field"   : "autocompleteName",
-      "blur #js-phone-field" : "autocompletePhone",
+      "blur #js-fio-field"      : "autocompleteName",
+      "blur #js-phone-field"    : "autocompletePhone",
       "keydown #js-phone-field" : "correctPhone"
     },
 
@@ -31,23 +31,25 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     showErrors: function(model, error) {
       if(error.phone) {
         this.toggleSMSConfirmation(false);
-        this.ui.phone.addClass('errorField');
+        this.ui.phone.addClass('not-valid');
       }
 
       if(error.fio) {
-        this.ui.fio.addClass('errorField');
+        this.ui.fio.addClass('not-valid');
       }
 
     },
 
     removeErrors: function(validFields) {
       if(validFields.phone) {
-        this.ui.phone.removeClass('errorField');
+        this.ui.phone.removeClass('not-valid');
+        this.ui.phone.addClass('valid');
         this.toggleSMSConfirmation(true);
       } 
 
       if(validFields.fio) {
-        this.ui.fio.removeClass('errorField');
+        this.ui.fio.removeClass('not-valid');
+        this.ui.fio.addClass('valid');
       }
 
     },
