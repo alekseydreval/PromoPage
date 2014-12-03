@@ -29,8 +29,6 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
       if(model.changed.loanAmount || model.changed.loanRepayDate){
         this.ui.overheadInfo.text(model.calculateOverhead());
       }
-
-      console.log(model);
     },
 
     // updateLoanInfo: function(model, value) {
