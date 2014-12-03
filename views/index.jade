@@ -37,8 +37,8 @@ block content
             div.terms
               div
                 span На&nbsp;
-                span 17&nbsp;
-                span дней&nbsp;
+                span(id='js-days-before-repay-info') <%= daysBeforeRepay() %>
+                span &nbsp;дней&nbsp;
                 span до:
 
                 div: input(type="text").datepicker

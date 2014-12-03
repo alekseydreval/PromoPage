@@ -23,6 +23,7 @@ ApplicationForm.module('Entities', function (Entities, ApplicationForm, Backbone
       });
 
       this.set('calculateOverhead', this.calculateOverhead.bind(this));
+      this.set('daysBeforeRepay', this.daysBeforeRepay.bind(this));
 
     },
 
@@ -31,6 +32,10 @@ ApplicationForm.module('Entities', function (Entities, ApplicationForm, Backbone
               this.get('percentRate') * this.get('loanAmount') * 
               Math.ceil((this.get('loanRepayDate') - this.get('dateNow')) / (1000*60*60*24))
              );
+    },
+
+    daysBeforeRepay: function () {
+      return this.get('loanRepayDate').getDate() - this.get('dateNow').getDate();
     },
 
     validate: function(attrs, opts) {

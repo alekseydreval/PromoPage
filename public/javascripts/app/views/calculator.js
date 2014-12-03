@@ -7,6 +7,7 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
       "rangeSlider"  : 'input[type="range"]',
       "loanInfo"     : '#js-loan-info',
       "overheadInfo" : '#js-overhead-info',
+      "daysBeforeRepayInfo" : "#js-days-before-repay-info",
       "datePicker"   : '.datepicker'
     },
 
@@ -29,6 +30,11 @@ ApplicationForm.module('Views', function (Views, ApplicationForm, Backbone, Mari
       if(model.changed.loanAmount || model.changed.loanRepayDate){
         this.ui.overheadInfo.text(model.calculateOverhead());
       }
+
+      if(model.changed.loanRepayDate) {
+        this.ui.daysBeforeRepayInfo.text(model.daysBeforeRepay());
+      }
+
     },
 
     // updateLoanInfo: function(model, value) {
