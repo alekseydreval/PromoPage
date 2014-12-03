@@ -231,63 +231,63 @@ block content
   div.overlay.dark(style="display: none;")
   div.window(style="display: none;", id="js-modal-dialog")
 
-    script(type='text/template', id='modal-dialog-template')
-      div
-        div.dialog.without
-          div.request-loan
-            div.information(id='js-modal-info')
-            div.content(id='js-modal-form')
+  script(type='text/template', id='modal-dialog-template')
+    div
+      div.dialog.without
+        div.request-loan
+          div.information(id='js-modal-info')
+          div.content(id='js-modal-form')
 
-    script(type='text/template', id='modal-info-template')
-      i.icon-logo-znak
+  script(type='text/template', id='modal-info-template')
+    i.icon-logo-znak
+    div.section
+      div.title: span Сумма займа:
+      div.text
+       span <%= loanAmount %> рублей
+    
+    div.section
+      div.title: span Вернуть до:
+      div.text
+        span <%= formattedRepayDate() %>
+
+    div.section
+      div.title: span Сумма возврата:
+      div.text
+        span <%= loanAmount + calculateOverhead() %> рублей
+
+
+  script(type='text/template', id='modal-form-1-template')
+    div.title
+      span Шаг 1 из 4  —  Контактные данные
+      button.clear(id='js-modal-close')
+        i.icon-close
+    
+    div
       div.section
-        div.title: span Сумма займа:
-        div.text
-         span <%= loanAmount %> рублей
-      
-      div.section
-        div.title: span Вернуть до:
-        div.text
-          span <%= formattedRepayDate() %>
+        div.caption: span ФИО:
+        div.textbox
+          input(type="text", placeholder="Введите вашу фамилию, имя и отчество", id='js-fio-field')
+
+        div.caption
+          span Номер мобильного телефона:
+
+        div.textbox
+          div
+            input(type="text", placeholder="+7", id='js-phone-field', data-mask='+7(___)___-__-__')
+
+          div.toolbar
+            button(disabled).rectangular.red(id="js-sms-confirm")
+              span Подтвердить номер телефона
 
       div.section
-        div.title: span Сумма возврата:
-        div.text
-          span <%= loanAmount + calculateOverhead() %> рублей
+        p.small На указанный Вами номер телефона отправлено SMS с кодом подтверждения.<br>Напишите код из SMS в специальное поле ниже и нажмите кнопку «Продолжить».<br>Получить код повторно можно будет через <span>01:37</span>
 
+        div.sms-confirmation
+          div.textbox.not-valid: input(type="text", placeholder="Код из SMS")
+          button(disabled).red
+            span Продолжить
 
-    script(type='text/template', id='modal-form-1-template')
-      div.title
-        span Шаг 1 из 4  —  Контактные данные
-        button.clear(id='js-modal-close')
-          i.icon-close
-      
-      div
-        div.section
-          div.caption: span ФИО:
-          div.textbox
-            input(type="text", placeholder="Введите вашу фамилию, имя и отчество", id='js-fio-field')
+      div.agreement
+        div.checkbox.checked: i.icon-checkbox
 
-          div.caption
-            span Номер мобильного телефона:
-
-          div.textbox
-            div
-              input(type="text", placeholder="+7", id='js-phone-field', data-mask='+7(___)___-__-__')
-
-            div.toolbar
-              button(disabled).rectangular.red(id="js-sms-confirm")
-                span Подтвердить номер телефона
-
-        div.section
-          p.small На указанный Вами номер телефона отправлено SMS с кодом подтверждения.<br>Напишите код из SMS в специальное поле ниже и нажмите кнопку «Продолжить».<br>Получить код повторно можно будет через <span>01:37</span>
-
-          div.sms-confirmation
-            div.textbox.not-valid: input(type="text", placeholder="Код из SMS")
-            button(disabled).red
-              span Продолжить
-
-        div.agreement
-          div.checkbox.checked: i.icon-checkbox
-
-          span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.
+        span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.
