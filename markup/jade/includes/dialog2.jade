@@ -1,0 +1,66 @@
+div.overlay.dark
+
+div.window
+  div.pattern-cell: div
+    div.dialog.without
+      div.request-loan
+        div.information
+          i.icon-logo-znak
+          div.section
+            div.title: span Сумма займа:
+            div.text: span 20000 рублей
+          
+          div.section
+            div.title: span Вернуть до:
+            div.text: span 30.02.2015 г.
+
+          div.section
+            div.title: span Сумма возврата:
+            div.text: span 22400 рублей
+
+        div.content
+          div.title
+            span Шаг 2 из 4  —  Паспортные данные
+            button.clear: i.icon-close
+
+          div
+            div.section
+              strong Паспорт гражданина РФ
+
+              div.pattern-cell
+                div
+                  div.caption: span Серия:
+                  div.textbox: input(type="text", placeholder="")
+
+                div
+                  div.caption: span Номер:
+                  div.textbox: input(type="text", placeholder="")
+
+                div
+                  div.caption: span Дата выдачи:
+                  div.textbox: input(type="text", placeholder="ДД.ММ.ГГ")
+
+              div.pattern-cell
+                div
+                  div.caption: span Кем выдан:
+                  div.textbox: input(type="text", placeholder="")
+
+                div
+                  div.caption: span Код подразделения:
+                  div.textbox: input(type="text", placeholder="")
+
+            div.section
+              div.caption: span Адрес прописки:
+              div.textbox: input(type="text", placeholder="Начните вводить адрес …")
+
+              div.caption: span Фактически адрес проживания
+              div.textbox: input(type="text", placeholder="Начните вводить адрес …")
+
+              div.agreement
+                div.checkbox: i.icon-checkbox
+
+                span Место проживания совпадает с адресом прописки
+
+            div.section.control
+              button.red-link: span Предыдущий шаг
+              button.red: span Продолжить

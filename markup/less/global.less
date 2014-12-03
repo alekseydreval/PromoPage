@@ -186,7 +186,7 @@
 						font-size: @font-size-default*4;
 
 						margin-top: -5px;
-						margin-bottom: 8px;
+						margin-bottom: 23px;
 					}
 				}
 			}
@@ -194,18 +194,17 @@
 			// Terms
 
 			.terms {
-				padding-top: 18px;
+				padding-top: 31px;
 
-				.pattern-cell {
+				&>div {
 					position: relative;
-					width: 100%;
 
 					.picker {
 						left: 0;
 						top: 24px;
 					}
 
-					&>*:last-child { text-align: right; }
+					&>div { float: right; }
 
 					&:not(:last-child) {
 						border-bottom: @border-width-default @gray-color-light-alt solid;
@@ -229,6 +228,8 @@
 					text-align: right;
 					font-weight: bold;
 					cursor: pointer;
+
+					max-width:  140px;
 
 					.user-select(none);
 				}

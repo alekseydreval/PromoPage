@@ -60,6 +60,15 @@
 		&[disabled] { opacity: 0.4; }
 	}
 
+	&.red-link {
+		background-color: transparent;
+		border: none;
+
+		color: @red-color-default;
+
+		&:hover span { text-decoration: underline; }
+	}
+
 	&.white {
 		border: @border-width-default*2 @white-color-default solid;
 		border-radius: @border-radius-default*6;

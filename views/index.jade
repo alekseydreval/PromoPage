@@ -35,12 +35,17 @@ block content
               input(type="range" min="1000", max="17000", step="500", value="5000")
 
             div.terms
-              div.pattern-cell
-                div Готов вернуть:
+              div
+                span На&nbsp;
+                span 17&nbsp;
+                span дней&nbsp;
+                span до:
+
                 div: input(type="text").datepicker
 
-              div.pattern-cell
-                div Сумма процентов по займу:
+              div
+                span Сумма процентов по займу:
+                
                 div
                   strong(id='js-overhead-info') <%= calculateOverhead() %> 
                   strong &nbsp;&#8399;

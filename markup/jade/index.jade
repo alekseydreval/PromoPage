@@ -33,13 +33,20 @@ html
             input(type="range" min="5000" max="30000" step="500")
 
           div.terms
-            div.pattern-cell
-              div Готов вернуть:
+            div
+              span На&nbsp;
+              span 17&nbsp;
+              span дней&nbsp;
+              span до:
+
               div: input(type="text").datepicker
 
-            div.pattern-cell
-              div Сумма процентов по займу:
-              div: strong 2400 &#8399;
+            div
+              span Сумма процентов по займу:
+
+              div
+                strong 2400
+                strong &nbsp;&#8399;
 
             button.large.red
               span Получить деньги
@@ -221,4 +228,5 @@ html
 
   // Dialogs
 
-  include includes/dialog1
+  //- include includes/dialog1
+  include includes/dialog2

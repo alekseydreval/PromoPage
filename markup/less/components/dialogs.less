@@ -69,8 +69,7 @@
 		}
 
 		.section {
-			padding: @indent-default*2 0;
-			border-bottom: @border-width-default @gray-color-light-alt dotted;
+			padding-top: @indent-default*2;
 
 			.caption {
 				margin-bottom: @indent-small;
@@ -81,17 +80,13 @@
 				input {
 					background-color: @white-color-alt;
 					border: none;
-
-					box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset;
 				}
 
-				&:not(:last-child) { margin-bottom: @indent-default*2; }
-				&.not-valid {
-					input { border: @border-width-default @red-color-default solid; }
-				}
-				&.valid {
-					input { border: @border-width-default @green-color-default solid; }
-				}
+				&:not(:last-child) { margin-bottom: @indent-default*2 - 8px; }
+
+				&:not([class*="valid"]) input { box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset; }
+				&.not-valid input { border: @border-width-default @red-color-default solid; }
+				&.valid input { border: @border-width-default @green-color-default solid; }
 			}
 
 			button {
@@ -102,6 +97,42 @@
 					font-weight: bold;
 				}
 			}
+
+			.pattern-cell {
+				width: 100%;
+
+				&:not(:last-child) { margin-bottom: @indent-default*2 - 8px; }
+				&>div {
+					&:not(:first-child) { padding-left: @indent-default; }
+					&:not(:last-child) { padding-right: @indent-default; }
+					&:last-child {
+						width: 170px;
+					}
+				}
+			}
+
+			.agreement {
+				margin-top: 0;
+
+				span { line-height: 20px; }
+			}
+
+			input::-webkit-input-placeholder { color: @gray-color-default; }
+			input::-moz-placeholder { color: @gray-color-default; }
+			input:-moz-placeholder { color: @gray-color-default; }
+
+			&:not(.control) {
+				border-bottom: @border-width-default @gray-color-light-alt dotted;
+				padding-bottom: @indent-default*2;
+			}
+
+			&.control { text-align: right; }
+
+			&>strong {
+				display: block;
+				margin-bottom: @indent-small*2;
+			}
+
 		}
 
 		.agreement {
@@ -171,7 +202,7 @@
 	left: 0;
 	top: 0;
 
-	height: 100%;
+	height: 110%;
 	width: 100%;
 
 	cursor: pointer;
