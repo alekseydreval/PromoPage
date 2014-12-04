@@ -1,11 +1,13 @@
 (function ($) {
 
-  $.fn.mask = function(mask, cb) {
+  $.fn.mask = function(mask, opts) {
 
-    function InputMask(mask, $el, cb) {
+    function InputMask(mask, $el, opts) {
       this.mask               = mask;
       this.input              = $el[0];
-      this.completionCallback = cb;
+      this.completionCallback = opts.completion || this.emptyFn;
+      this.progressCallback   = opts.progress || this.emptyFn;
+      this.invalid            = opts.invalid;
       this.cursorPosition     = 0;
 
       $el.on('focusin',  this.focusIn.bind(this));
@@ -36,19 +38,23 @@
         if(_.include(this.keyCodes.prohibited, e.keyCode))
           return;
 
+        if(_.include(this.keyCodes.digits, e.keyCode) && this.isMaskFilled()) 
+          return;
+
+
         if(_.include(this.keyCodes.digits, e.keyCode)) {
-          if(this.isMaskFilled())
-            return;
-
-          if(this.willMaskBeFilled())
-            this.completionCallback();
-
+          if(e.keyCode >= 96 ) 
+            e.keyCode = e.keyCode - 48;
+          console.log(e.keyCode); 
           updatedInput = updatedInput.replaceAt(this.cursorPosition, parseInt(String.fromCharCode(e.keyCode)).toString());
         }
-
-        if(_.include(this.keyCodes.destructive, e.keyCode)) {
+        else if(_.include(this.keyCodes.destructive, e.keyCode))
           updatedInput = this.removeNearestCharacter(e.keyCode == 46 ? 1 : -1);
-        }
+
+        if(_.include(this.keyCodes.digits, e.keyCode) && this.willMaskBeFilled())
+          this.completionCallback(updatedInput);
+        else
+          this.progressCallback();
 
         this.input.value = updatedInput;
 
@@ -92,7 +98,8 @@
     InputMask.prototype.keyCodes = {
       prohibited:   [ 35, 36, 37, 38, 39, 40 ], // Arrows & PgUp PgDown
       destructive:  [ 8, 46 ],                  // Backspace, Delete
-      digits:       [ 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 ],
+      digits:       [ 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                      96, 97, 98, 99, 100, 101, 102, 103, 104, 105 ],
       tab:            9,
       modificators: [ 17, 18 ]                 // Alt & Ctrl
     };
@@ -123,7 +130,9 @@
         this.input.value = '';
     };
 
-    new InputMask(mask, this, cb);
+    InputMask.prototype.emptyFn = function(){};
+
+    new InputMask(mask, this, opts);
 
   };
 

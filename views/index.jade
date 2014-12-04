@@ -276,15 +276,15 @@ block content
             input(type="text", placeholder="+7", id='js-phone-field', data-mask='+7(___)___-__-__')
 
           div.toolbar
-            button(disabled).rectangular.red(id="js-sms-confirm")
+            button(disabled).rectangular.red(id="js-request-sms-confirmation")
               span Подтвердить номер телефона
 
-      div.section
+      div.section(style="display: none;", id='js-confirmation-section')
         p.small На указанный Вами номер телефона отправлено SMS с кодом подтверждения.<br>Напишите код из SMS в специальное поле ниже и нажмите кнопку «Продолжить».<br>Получить код повторно можно будет через <span>01:37</span>
 
         div.sms-confirmation
-          div.textbox.not-valid: input(type="text", placeholder="Код из SMS")
-          button(disabled).red
+          div.textbox.not-valid: input(type="text", placeholder="Код из SMS", id='js-confirmation-code')
+          button(disabled, id='js-sms-code-approval').red
             span Продолжить
 
       div.agreement

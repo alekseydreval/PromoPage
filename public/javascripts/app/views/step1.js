@@ -9,11 +9,18 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     ui: {
       phone         : "#js-phone-field",
       fio           : "#js-fio-field",
-      smsConfrimBtn : "#js-sms-confirm"
+      requestSmsBtn : "#js-request-sms-confirmation",
+      approveSmsCodeBtn    : '#js-sms-code-approval',
+      confirmationSection  : '#js-confirmation-section',
+      confirmationCodeInput: '#js-confirmation-code'
     },
 
     events: {
-      "blur #js-fio-field"          : "autocompleteName"
+      "blur #js-fio-field" : "autocompleteName",
+      "click #js-request-sms-confirmation" : "sendSMS",
+      "keyup #js-confirmation-code" : "checkCode",
+      'click .checkbox' : 'toggleAgreementCheckbox',
+      'click #js-sms-code-approval': 'proceedToNextStep'
     },
 
     modelEvents: {
@@ -33,14 +40,24 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
         this.ui.phone.parent().removeClass('valid');
       }
 
+      console.log(error.fio)
+
       if(error.fio) {
         this.ui.fio.parent().addClass('not-valid');
         this.ui.fio.parent().removeClass('valid');
       }
 
+      if(error.confirmationCode) {
+        console.log('here')
+        this.ui.confirmationCodeInput.parent().addClass('not-valid');
+        this.ui.confirmationCodeInput.parent().removeClass('valid'); 
+        this.ui.approveSmsCodeBtn.attr('disabled', 'disabled');
+      }
+
     },
 
     removeErrors: function(validFields) {
+
       if(validFields.phone) {
         this.ui.phone.parent().removeClass('not-valid');
         this.ui.phone.parent().addClass('valid');
@@ -52,13 +69,20 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
         this.ui.fio.parent().addClass('valid');
       }
 
+      if(validFields.confirmationCode) {
+        console.log('there')
+        this.ui.confirmationCodeInput.parent().removeClass('not-valid');
+        this.ui.confirmationCodeInput.parent().addClass('valid');
+        this.ui.approveSmsCodeBtn.removeAttr('disabled');
+      }
+
     },
 
     toggleSMSConfirmation: function(enable) {
       if(enable)
-        this.ui.smsConfrimBtn.removeAttr('disabled');
+        this.ui.requestSmsBtn.removeAttr('disabled');
       else
-        this.ui.smsConfrimBtn.attr('disabled', true);
+        this.ui.requestSmsBtn.attr('disabled', true);
     },
 
     checkForSubmitEnabling: function() {
@@ -94,9 +118,8 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
       });
     },
 
-    autocompletePhone: function(cb) {
-      var t     = this, 
-          phone = this.ui.phone.val();
+    checkPhone: function(phone) {
+      var t = this;
 
       if(phone == "")
         return;
@@ -113,6 +136,42 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
           t.model.isValid({ field: 'phone' });
         }
       });
+    },
+
+    sendSMS: function() {
+      var t = this;
+      console.log(t)
+
+      // $.post('/confirmation', function(res, status) {
+      //   if(status == 'success') {
+          t.ui.confirmationSection.show();
+        // }
+
+      // });
+    },
+
+    checkCode: function(e) {
+      this.showErrors({}, { confirmationCode: (e.target.value.length != 4) });
+      this.removeErrors({ confirmationCode: (e.target.value.length == 4) });
+    },
+
+    toggleAgreementCheckbox: function(e) {
+      $('.checkbox').toggleClass('checked');
+
+      if($('.checkbox').hasClass('checked'))
+        this.ui.approveSmsCodeBtn.removeAttr('disabled');
+      else
+        this.ui.approveSmsCodeBtn.attr('disabled', true);
+
+    },
+
+    proceedToNextStep: function() {
+      console.log(this.model.isValid());
+    },
+
+    onRender: function() {
+      this.ui.phone.mask('+7(___)___-__-__', { completion: this.checkPhone.bind(this),
+                                                 progress: this.toggleSMSConfirmation.bind(this) });
     }
 
   });
