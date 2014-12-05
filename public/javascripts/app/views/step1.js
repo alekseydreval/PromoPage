@@ -24,7 +24,6 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     },
 
     modelEvents: {
-      "change:phone"             : "updateUIPhone",
       "invalid"                  : "showErrors",
       "validationPassed"         : "removeErrors"
     },
@@ -36,8 +35,8 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     showErrors: function(model, error) {
       if(error.phone) {
         this.toggleSMSConfirmation(false);
-        this.ui.phone.parent().addClass('not-valid');
-        this.ui.phone.parent().removeClass('valid');
+        this.ui.phone.closest('.textbox').addClass('not-valid');
+        this.ui.phone.closest('.textbox').removeClass('valid');
       }
 
       console.log(error.fio)
@@ -48,7 +47,6 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
       }
 
       if(error.confirmationCode) {
-        console.log('here')
         this.ui.confirmationCodeInput.parent().addClass('not-valid');
         this.ui.confirmationCodeInput.parent().removeClass('valid'); 
         this.ui.approveSmsCodeBtn.attr('disabled', 'disabled');
@@ -59,8 +57,8 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     removeErrors: function(validFields) {
 
       if(validFields.phone) {
-        this.ui.phone.parent().removeClass('not-valid');
-        this.ui.phone.parent().addClass('valid');
+        this.ui.phone.closest('.textbox').removeClass('not-valid');
+        this.ui.phone.closest('.textbox').addClass('valid');
         this.toggleSMSConfirmation(true);
       } 
 
@@ -70,7 +68,6 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
       }
 
       if(validFields.confirmationCode) {
-        console.log('there')
         this.ui.confirmationCodeInput.parent().removeClass('not-valid');
         this.ui.confirmationCodeInput.parent().addClass('valid');
         this.ui.approveSmsCodeBtn.removeAttr('disabled');

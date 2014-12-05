@@ -67,7 +67,6 @@ ApplicationForm.module('Entities', function (Entities, ApplicationForm, Backbone
       },
 
       phone: function(attrs) {
-        return;
         if(!attrs.phone || attrs.phoneType != "Мобильный")
           return { err: '' };
       }

@@ -45,7 +45,6 @@
         if(_.include(this.keyCodes.digits, e.keyCode)) {
           if(e.keyCode >= 96 ) 
             e.keyCode = e.keyCode - 48;
-          console.log(e.keyCode); 
           updatedInput = updatedInput.replaceAt(this.cursorPosition, parseInt(String.fromCharCode(e.keyCode)).toString());
         }
         else if(_.include(this.keyCodes.destructive, e.keyCode))
