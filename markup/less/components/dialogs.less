@@ -163,6 +163,18 @@
 				float: left;
 			}
 		}
+
+		.error-msg {
+			border-radius: @border-radius-default;
+			background-color: #ffd9dc;
+			color: @red-color-default;
+
+			text-shadow: @shadow-white-default;
+			text-align: center;
+
+			line-height: @button-height-default;
+			margin-bottom: @indent-default*2 - 8;
+		}
 	}
 }
 
@@ -181,6 +193,8 @@
 
 	z-index: 101;
 
+	overflow-y: scroll;
+
 	&>* {
 		height: inherit;
 
@@ -192,9 +206,7 @@
 		}
 	}
 
-	.dialog {
-		overflow: hidden;
-	}
+	.dialog { overflow: hidden; }
 }
 
 .overlay {

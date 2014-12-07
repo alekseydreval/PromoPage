@@ -38,37 +38,19 @@ ApplicationForm.module('Entities', function (Entities, ApplicationForm, Backbone
       return this.get('loanRepayDate').getDate() - this.get('dateNow').getDate();
     },
 
-    validate: function(attrs, opts) {
-      var validator, err, 
-          errFields = {}, validFields = {};
+    validation: {
 
-      if(opts && opts.field)
-        validator = _.pick(this.validators, opts.field);
+      firstname:   [{ required: true }, { pattern: /^[\sа-я]+$/i }],
 
-      _.each(validator || this.validators, function(validator, field) {
-        if(err = validator(attrs))
-          errFields[field] = err;
-        else
-          validFields[field] = true;
-      });
+      lastname:    [{ required: true }, { pattern: /^[\sа-я]+$/i }],
 
-      if(_.keys(errFields).length)
-        return errFields;
-      else
-        this.trigger('validationPassed', validFields);
+      middlename:  [{ required: true }, { pattern: /^[\sа-я]+$/i }],
 
-    },
+      phone:       [{ required: true }, { pattern: /^[0-9+\-()]+/i }],
 
-    validators: {
-
-      fio: function(attrs) {
-        if(!attrs.firstname || !attrs.lastname || !attrs.middlename)
-          return { err: '' };
-      },
-
-      phone: function(attrs) {
-        if(!attrs.phone || attrs.phoneType != "Мобильный")
-          return { err: '' };
+      fio: function() {
+        if(!this.isValid(['firstname', 'lastname', 'middlename']))
+          return 'Некорректное ФИО';
       }
 
     }

@@ -280,10 +280,10 @@ block content
               span Подтвердить номер телефона
 
       div.section(style="display: none;", id='js-confirmation-section')
-        p.small На указанный Вами номер телефона отправлено SMS с кодом подтверждения.<br>Напишите код из SMS в специальное поле ниже и нажмите кнопку «Продолжить».<br>Получить код повторно можно будет через <span>01:37</span>
+        p.small На указанный Вами номер телефона отправлено SMS с кодом подтверждения.<br>Напишите код из SMS в специальное поле ниже и нажмите кнопку «Продолжить».<br>Получить код повторно можно будет через <span id='js-time'></span>
 
         div.sms-confirmation
-          div.textbox.not-valid: input(type="text", placeholder="Код из SMS", id='js-confirmation-code')
+          div.textbox: input(type="text", placeholder="Код из SMS", id='js-confirmation-code' maxlength="4")
           button(disabled, id='js-sms-code-approval').red
             span Продолжить
 

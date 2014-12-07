@@ -12,20 +12,22 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
       requestSmsBtn : "#js-request-sms-confirmation",
       approveSmsCodeBtn    : '#js-sms-code-approval',
       confirmationSection  : '#js-confirmation-section',
-      confirmationCodeInput: '#js-confirmation-code'
+      confirmationCodeInput: '#js-confirmation-code',
+      timer                : '#js-time'
     },
 
     events: {
       "blur #js-fio-field" : "autocompleteName",
       "click #js-request-sms-confirmation" : "sendSMS",
-      "keyup #js-confirmation-code" : "checkCode",
+      "keyup #js-confirmation-code" : "checkConfirmationCode",
       'click .checkbox' : 'toggleAgreementCheckbox',
       'click #js-sms-code-approval': 'proceedToNextStep'
     },
 
     modelEvents: {
       "invalid"                  : "showErrors",
-      "validationPassed"         : "removeErrors"
+      "validationPassed"         : "removeErrors",
+      "validated:invalid"        : "showErrors"
     },
 
     updateUIPhone: function() {
@@ -38,8 +40,6 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
         this.ui.phone.closest('.textbox').addClass('not-valid');
         this.ui.phone.closest('.textbox').removeClass('valid');
       }
-
-      console.log(error.fio)
 
       if(error.fio) {
         this.ui.fio.parent().addClass('not-valid');
@@ -54,7 +54,7 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
 
     },
 
-    removeErrors: function(validFields) {
+    removeErrors: function(model, validFields) {
 
       if(validFields.phone) {
         this.ui.phone.closest('.textbox').removeClass('not-valid');
@@ -107,9 +107,12 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
             t.model.set('lastname',  suggestions[0].data.surname);
             t.model.set('middlename', suggestions[0].data.patronymic);
             t.model.set('gender', suggestions[0].data.gender == 'FEMALE' ? 'Ж' : 'М');
-          }
+          } 
 
-          t.model.isValid({ field: 'fio' });
+          if(!t.model.isValid('fio'))
+            t.model.trigger('validated:invalid', t.model, { fio: true });
+          else
+            t.removeErrors(t.model, { fio: true });
 
         }
       });
@@ -125,31 +128,43 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
         if(status == 'success') {
           var phones = JSON.parse(res.body);
 
-          if(phones && phones[0]){
+          if(phones && phones[0] && phones[0].type == 'Мобильный')
             t.model.set('phone', phones[0].phone);
-            t.model.set('phoneType', phones[0].type);
-          }
+          
+          if(!t.model.isValid('phone'))
+            t.model.trigger('validated:invalid', t.model, { phone: true });
+          else
+            t.removeErrors(t.model, { phone: true });
 
-          t.model.isValid({ field: 'phone' });
         }
       });
     },
 
     sendSMS: function() {
-      var t = this;
-      console.log(t)
+      this.timer.start(this.timer.timeToMS('00:30'));
+      this.disableSMSbtn();
 
       // $.post('/confirmation', function(res, status) {
       //   if(status == 'success') {
-          t.ui.confirmationSection.show();
+          this.ui.confirmationSection.show();
         // }
 
       // });
     },
 
-    checkCode: function(e) {
-      this.showErrors({}, { confirmationCode: (e.target.value.length != 4) });
-      this.removeErrors({ confirmationCode: (e.target.value.length == 4) });
+    disableSMSbtn: function() {
+      this.ui.requestSmsBtn.attr('disabled', true);
+    },
+
+    enableSMSbtn: function() {
+      this.ui.requestSmsBtn.removeAttr('disabled');
+    },
+
+    checkConfirmationCode: function(e) {
+      if(e.target.value.length != 4)
+        this.showErrors(this.model, { confirmationCode: true });
+      else
+        this.removeErrors(this.model, { confirmationCode: true });
     },
 
     toggleAgreementCheckbox: function(e) {
@@ -163,12 +178,27 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     },
 
     proceedToNextStep: function() {
-      console.log(this.model.isValid());
+      this.model.validate();
     },
 
     onRender: function() {
-      this.ui.phone.mask('+7(___)___-__-__', { completion: this.checkPhone.bind(this),
+      var t = this;
+      t.ui.phone.mask('+7(___)___-__-__', { completion: this.checkPhone.bind(this),
                                                  progress: this.toggleSMSConfirmation.bind(this) });
+
+      var timer = new Tock({
+        countdown: true,
+        interval: 1000,
+        complete: this.enableSMSbtn.bind(this),
+        callback: function() { 
+          var current_time = timer.msToTime(timer.lap()).split('.');
+          t.ui.timer.text(current_time[0]);
+        }
+      });
+
+      t.timer = timer;
+
+      Backbone.Validation.bind(this);
     }
 
   });
