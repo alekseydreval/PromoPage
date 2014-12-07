@@ -10,55 +10,54 @@ ApplicationForm.module('Controllers',  function (Controllers, ApplicationForm, B
     // Backbone.history.navigate('step/' + data.nextStep);
   }
 
+  var getStep = function() {
+    var step = localStorage.getItem('nextApplicationStep');
+
+    if(!step){
+      localStorage.setItem('nextApplicationStep', 1);
+      return 1
+    }
+
+    return step;
+  }
+
 
   Controllers.ModalController = {
 
     showModal: function() {
-      var modalView = new ApplicationForm.Views.ModalDialog({ model: ApplicationForm.getModel() });
+      var model = ApplicationForm.getModel();
+
+      var modalView = this.modalView = new ApplicationForm.Views.ModalDialog({ model: model });
+      var modalInfoView = new ApplicationForm.Views.ModalDialogInfo({ model: model });
+      var modalFormView = this.modalFormView = this.getStepView(1);
+
       ApplicationForm.modalDialogRegion.show(modalView);
-      
-      modalView.form.show(this.getNextStepView());
-      modalView.information.show(new ApplicationForm.Views.ModalDialogInfo({ model: ApplicationForm.getModel() }));
+
+      modalView.information.show(modalInfoView);
+      modalView.form.show(modalFormView);
     },
 
-    // changeStep: function(){
-    //   modalView.form.show(this.getNextStepView());
-    // },
+    renderNextStep: function(nextStep){
+      this.modalFormView.destroy();
+      this.modalView.form.show(this.getStepView(nextStep));
+    },
 
-    getNextStepView: function() {
-      var stepId = localStorage.getItem('nextApplicationStep') || 1;
-      var step   = new ApplicationForm.Views.Steps[stepId]({ submitButton: "Далее", model: ApplicationForm.getModel() });
+    getStepView: function(step) {
+      var stepView, 
+          step = step || 1,
+          model = ApplicationForm.getModel(),
+          t    = this;
 
-      // step.on('processNextStep', function() {
-      //   processNextStep();
-      // });
+      stepView = new ApplicationForm.Views.Steps[step]({ model: model });
+      stepView.on('changeStep', this.renderNextStep.bind(this));
 
-
-      step.on('submit', function(e) {
-        step.commit();
-        step.validatePhone(function(errMsg) {
-          if(errMsg)
-            step.fields.phone.setError(errMsg);
-          else
-            step.model.save({ success: processNextStep });
-        });
-
-        e.preventDefault();
-      });
-
-      // console.log(step.render())
-
-      return step;
+      return stepView;
 
 
       // If session.currentStep < :id then 
       //   redirect to /step/:session.currentStep 
       // else 
       //   render form
-
-    },
-
-    finished: function() {
 
     }
 

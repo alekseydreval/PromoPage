@@ -3,6 +3,9 @@
   $.fn.mask = function(mask, opts) {
 
     function InputMask(mask, $el, opts) {
+      if(!opts)
+        opts = {};
+      
       this.mask               = mask;
       this.input              = $el[0];
       this.completionCallback = opts.completion || this.emptyFn;

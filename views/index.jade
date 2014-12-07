@@ -291,3 +291,52 @@ block content
         div.checkbox.checked: i.icon-checkbox
 
         span Я даю компании «РосДеньги» своё согласие на обработку моих персональных данных в соответствии с законодательством Российской Федерации и Политикой использования персональных данных.
+
+  script(type='text/template', id='modal-form-2-template')
+    div.title
+      span Шаг 2 из 4  —  Паспортные данные
+      button.clear: i.icon-close
+
+    div
+      div.section
+        div.error-msg: span Паспорт недействителен
+        
+        strong Паспорт гражданина РФ
+
+        div.pattern-cell
+          div
+            div.caption: span Серия:
+            div.textbox: input(type="text", placeholder="", maxlength=4, id='series')
+
+          div
+            div.caption: span Номер:
+            div.textbox: input(type="text", placeholder="", maxlength=6, id='number')
+
+          div
+            div.caption: span Дата выдачи:
+            div.textbox: input(type="text", placeholder="ДД.ММ.ГГ", id='dateOfIssue')
+
+        div.pattern-cell
+          div
+            div.caption: span Кем выдан:
+            div.textbox: input(type="text", placeholder="", id='issuedBy')
+
+          div
+            div.caption: span Код подразделения:
+            div.textbox: input(type="text", placeholder="", maxlength=7, id='depCode')
+
+      div.section
+        div.caption: span Адрес прописки:
+        div.textbox: input(type="text", placeholder="Начните вводить адрес …", id='address')
+
+        div.caption: span Фактический адрес проживания
+        div.textbox: input(type="text", placeholder="Начните вводить адрес …", id='addressFact')
+
+        div.agreement
+          div.checkbox: i.icon-checkbox
+
+          span Место проживания совпадает с адресом прописки
+
+      div.section.control
+        button.red-link: span(id='prevStep') Предыдущий шаг
+        button.red: span(id='nextStep') Продолжить

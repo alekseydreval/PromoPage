@@ -1,8 +1,8 @@
 ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone, Marionette, $, _) {
 
-  // var varietyLengthName = ApplicationForm.Validators.varietyLengthName.bind(ApplicationForm.Validators);
-
   Steps[1] = Marionette.ItemView.extend({
+
+    step: 1,
 
     template: '#modal-form-1-template',
 
@@ -178,7 +178,13 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
     },
 
     proceedToNextStep: function() {
+      /* 1. Validate model
+         2. Send model data with code
+         3. Move to next step
+       */
+      
       this.model.validate();
+      this.trigger('changeStep', this.step + 1);
     },
 
     onRender: function() {
@@ -199,7 +205,11 @@ ApplicationForm.module('Views.Steps', function (Steps, ApplicationForm, Backbone
       t.timer = timer;
 
       Backbone.Validation.bind(this);
-    }
+    },
+
+    onBeforeDestroy: function() {
+      this.timer.stop();
+    },
 
   });
     
